@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+body,
+html {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  display: block;
+  justify-content: center;
+  background: url(C:/Users/jpribio/DesarrolloWebCliente/proyecto-final/public/imagenes/artbreeder-image-2024-12-14T13_41_59.055Z.jpeg)
+    no-repeat top left/cover;
+  background-position: center;
+}
