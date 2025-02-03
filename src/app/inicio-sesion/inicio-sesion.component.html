@@ -2,52 +2,50 @@
     <div class="d-none d-md-block zonaCompleta">
         <div class="container" id="container">
             <div class="formularioContenedor sign-up-container">
-                <form action="#">
+                <form>
                     <h2 class="registroTitulo">Registrarse</h2>
-                    <input type="text" placeholder="Nombre" />
-                    <input type="text" placeholder="Alias" />
-                    <input type="email" placeholder="Correo electrónico" />
-                    <input type="password" placeholder="Contraseña" />
-                    <input type="password" placeholder="Repetir contraseña" />
+                    <input type="text" placeholder="Nombre Completo" required /> <input type="text" placeholder="Alias"
+                        required /> <input type="email" placeholder="Correo electrónico" required /> <input
+                        type="password" placeholder="Contraseña" required /> <input type="password"
+                        placeholder="Repetir contraseña" />
                     <div class="debajoDeLosInputs">
                         <div class="social-contenedor2">
                             <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
                         </div>
-                        <button class="botonNavegador botonRegistro">
-                            Registrarse
-                        </button>
+                        <button type="submit" class=" botonRegistro">
+                            Registrarse</button>
                     </div>
                 </form>
             </div>
 
             <div class="formularioContenedor sign-in-container">
-                <form action="#">
+                <form>
                     <h2 class="inicioSesionTitulo">Inicio sesion</h2>
-                    <input type="email" placeholder="Correo electrónico" />
-                    <input type="password" placeholder="Contraseña" />
+                    <input type="email" placeholder="Correo electrónico" required /> <input type="password"
+                        placeholder="Contraseña" required />
                     <div class="debajoDeLosInputs">
                         <div class="social-contenedor">
                             <a href="#" class="social"><i class="fab fa-google"></i></a>
                         </div>
                         <a href="#">¿Has olvidado tu contraseña?</a>
                     </div>
-                    <button class="botonNavegador">Iniciar Sesion</button>
+                    <button type="submit" class=" botonIS1">Iniciar
+                        Sesion</button>
                 </form>
             </div>
 
-            <div class="overlay-container">
+
+            <div class="overlay-container" [ngClass]="{ 'right-panel-active': isSignUpActive }">
                 <div class="overlay">
                     <div class="overlay-panel overlay-left">
                         <h2 class="titulo">Bienvenido</h2>
                         <p>Inicia sesión con tu cuenta</p>
-                        <button class="botonNavegador" id="signIn">
-                            Iniciar sesion
-                        </button>
+                        <button class="botonIS1" (click)="toggleForm()" id="signIn">Iniciar sesión</button>
                     </div>
                     <div class="overlay-panel overlay-right">
                         <h2 class="titulo">¿Eres nuevo?</h2>
-                        <p>Unete a esta gran familia</p>
-                        <button class="botonNavegador" id="signUp">Registrarse</button>
+                        <p>Únete a esta gran familia</p>
+                        <button class="botonIS1" (click)="toggleForm()" id="signUp">Registrarse</button>
                     </div>
                 </div>
             </div>
@@ -55,42 +53,40 @@
     </div>
 
     <div class="d-block d-md-none contenedorIsMV">
-        <div class="form-container capacidadMinima" id="formContainer">
+        <div class="form-container capacidadMinima" [ngClass]="{ 'flip': isFlipped }" id="formContainer">
             <div class="form-inner">
                 <!-- Formulario Frontal -->
-                <form action="#" class="form formsm">
+                <form class="form formsm">
                     <h2 class="inicioSesionTitulo1">Inicio sesion</h2>
-                    <input type="email" placeholder="C o r r e o  e l e c t r ó n i c o" />
-                    <input type="password" placeholder="C o n t r a s e ñ a" />
+                    <input type="email" placeholder="C o r r e o  e l e c t r ó n i c o" required /> <input
+                        type="password" placeholder="C o n t r a s e ñ a" required />
                     <div class="debajoDeLosInputs1">
                         <div class="social-contenedor">
                             <a href="#" class="social1"><i class="fab fa-google"></i></a>
                         </div>
                         <a href="#" class="olvidoContra">¿Has olvidado tu contraseña?</a>
                     </div>
-                    <button class="botonNavegador botonIS1">Iniciar Sesion</button>
-                    <button type="button" onclick="flipForm()" class="botonFlip botonNavegador">
-                        Registrase
-                    </button>
+                    <div class="debajoDeLosInputs3">
+                        <button class="botonNavegador botonIS1">Iniciar Sesion</button>
+                        <button type="button" (click)="flipForm()" class="botonFlip botonIS1">Registrase</button>
+                    </div>
                 </form>
                 <!-- Formulario Trasero -->
-                <form action="#" class="form1 form-back formsm">
+                <form class="form1 form-back formsm">
                     <h2 class="registroTitulo1">Registrarse</h2>
-                    <input type="text" placeholder="N o m b r e  c o m p l e t o" />
-                    <input type="text" placeholder="A l i a s" />
-                    <input type="email" placeholder="C o r r e o  e l e c t r ó n i c o" />
-                    <input type="password" placeholder="C o n t r a s e ñ a" />
-                    <input type="password" placeholder="R e p e t i r  c o n t r a s e ñ a" />
+                    <input type="text" placeholder="N o m b r e  c o m p l e t o" required /> <input type="text"
+                        placeholder="A l i a s" required /> <input type="email"
+                        placeholder="C o r r e o  e l e c t r ó n i c o" required /> <input type="password"
+                        placeholder="C o n t r a s e ñ a" required /> <input type="password"
+                        placeholder="R e p e t i r  c o n t r a s e ñ a" />
                     <div class="social-contenedor3">
                         <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
                     </div>
-                    <div class="debajoDeLosInputs2">
-                        <button class="botonNavegador botonRegistro">
-                            Registrarse
-                        </button>
-                        <button type="button" onclick="flipForm()" class="botonFlip botonNavegador botonIS1">
-                            inicio Sesion
-                        </button>
+                    <div class="debajoDeLosInputs3">
+                        <button class="botonIS1 botonRegistro parteR">
+                            Registrarse</button>
+                        <button type="button" (click)="flipForm()" class="botonFlip botonIS1 parteR">inicio
+                            Sesion</button>
                     </div>
                 </form>
             </div>
