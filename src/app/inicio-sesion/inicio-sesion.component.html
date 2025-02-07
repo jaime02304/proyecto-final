@@ -2,27 +2,31 @@
     <div class="d-none d-md-block zonaCompleta">
         <div class="container" id="container">
             <div class="formularioContenedor sign-up-container">
-                <form>
+                <form (ngSubmit)="registrar()">
                     <h2 class="registroTitulo">Registrarse</h2>
-                    <input type="text" placeholder="Nombre Completo" required /> <input type="text" placeholder="Alias"
-                        required /> <input type="email" placeholder="Correo electrónico" required /> <input
-                        type="password" placeholder="Contraseña" required /> <input type="password"
+                    <input type="text" placeholder="Nombre Completo" required
+                        [(ngModel)]="usuarioRegistro.nombreCompletoUsu" /> <input type="text" placeholder="Alias"
+                        required [(ngModel)]="usuarioRegistro.aliasUsu" /> <input type="email"
+                        placeholder="Correo electrónico" required [(ngModel)]="usuarioRegistro.correoElectronicoUsu" />
+                    <input type="password" placeholder="Contraseña" required
+                        [(ngModel)]="usuarioRegistro.contraseniaUsu" /> <input type="password"
                         placeholder="Repetir contraseña" />
                     <div class="debajoDeLosInputs">
                         <div class="social-contenedor2">
                             <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
                         </div>
-                        <button type="submit" class=" botonRegistro">
+                        <button type="submit" class="botonIS1 botonRegistro">
                             Registrarse</button>
                     </div>
                 </form>
             </div>
 
             <div class="formularioContenedor sign-in-container">
-                <form>
+                <form (ngSubmit)="inicioSesion2()">
                     <h2 class="inicioSesionTitulo">Inicio sesion</h2>
-                    <input type="email" placeholder="Correo electrónico" required /> <input type="password"
-                        placeholder="Contraseña" required />
+                    <input type="email" placeholder="Correo electrónico" required
+                        [(ngModel)]="usuarioLogin.correoElectronicoUsu" /> <input type="password"
+                        placeholder="Contraseña" required [(ngModel)]="usuarioLogin.contraseniaUsu" />
                     <div class="debajoDeLosInputs">
                         <div class="social-contenedor">
                             <a href="#" class="social"><i class="fab fa-google"></i></a>
@@ -52,6 +56,8 @@
         </div>
     </div>
 
+
+    <!-- Parte Pequeña -->
     <div class="d-block d-md-none contenedorIsMV">
         <div class="form-container capacidadMinima" [ngClass]="{ 'flip': isFlipped }" id="formContainer">
             <div class="form-inner">
