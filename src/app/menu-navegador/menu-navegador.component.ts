@@ -1,18 +1,29 @@
-import { Component, ElementRef, ViewChild, HostListener } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  HostListener,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ServicioUsuariosService } from '../servicios/servicio-usuarios.service';
 
 @Component({
   selector: 'app-menu-navegador',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './menu-navegador.component.html',
-  styleUrl: './menu-navegador.component.css'
+  styleUrl: './menu-navegador.component.css',
 })
 export class MenuNavegadorComponent {
   @ViewChild('menuToggle') menuToggle!: ElementRef;
   @ViewChild('menuOpciones') menuOpciones!: ElementRef;
   menuVisible = false;
+  usuarioServicio = inject(ServicioUsuariosService);
+  isLoggedIn: boolean = false;
+  isAdmin: boolean = false;
 
   toggleMenu() {
     this.menuVisible = !this.menuVisible;
@@ -29,4 +40,8 @@ export class MenuNavegadorComponent {
       this.menuVisible = false;
     }
   }
+
+  // ngOnInit() {
+  //   this.usuarioServicio.
+  // }
 }

@@ -22,10 +22,18 @@
                         CATEGORÍA
                     </button></a>
                 <!-- Aqui deberia de poner una condicion que si es admin coja una cosa y si no que haga la otra -->
+                @if (!isLoggedIn) {
                 <button class="botonIconoIS" [routerLink]="['/inicio-sesion']" routerLinkActive="router-link-active">
                     <i class="fas fa-user icono"></i></button>
-                <a [routerLink]="['']" routerLinkActive="router-link-active"> <button
-                        class="botonNavegador botonAdmin">ADMIN</button></a>
+                }@else {
+                @if (!isAdmin) {
+                <button [routerLink]="['']" routerLinkActive="router-link-active"
+                    class="botonNavegador ">PERFIL</button>
+                }@else {
+                <button [routerLink]="['']" routerLinkActive="router-link-active"
+                    class="botonNavegador botonAdmin">ADMIN</button>
+                }
+                }
             </div>
         </div>
     </nav>

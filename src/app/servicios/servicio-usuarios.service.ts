@@ -13,22 +13,15 @@ export class ServicioUsuariosService {
   constructor(private http: HttpClient) {}
 
   // Método para iniciar sesión
-  inicioSesion(datos: LoginUsuario): Observable<Usuario> {
+  obtenerUsuario(datos: LoginUsuario): Observable<any> {
     return this.http.post(
       `${this.apiUrl}/inicioSesion`,
       datos
-    ) as Observable<Usuario>;
-  }
-
-  obtenerUsuario(datos: LoginUsuario): Promise<any> {
-    return lastValueFrom(this.http.post(`${this.apiUrl}/inicioSesion`, datos));
+    ) as Observable<any>;
   }
 
   // Método para registrar un nuevo usuario
-  registro(datos: RegistroUsuario): Observable<Usuario> {
-    return this.http.post(
-      `${this.apiUrl}/registro`,
-      datos
-    ) as Observable<Usuario>;
+  registro(datos: RegistroUsuario): Observable<any> {
+    return this.http.post(`${this.apiUrl}/registro`, datos) as Observable<any>;
   }
 }

@@ -4,21 +4,22 @@ import { LoginUsuario, RegistroUsuario, Usuario } from '../modelos/usuario';
 import { ServicioUsuariosService } from '../servicios/servicio-usuarios.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-inicio-sesion',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './inicio-sesion.component.html',
-  styleUrl: './inicio-sesion.component.css',
+  styleUrls: ['./inicio-sesion.component.css'], // Corregido: styleUrls (plural)
 })
 export class InicioSesionComponent {
   private usuarioServicio = inject(ServicioUsuariosService);
   router = inject(Router);
 
-  // Metodos de javascript en typescript
+  // Variables para el efecto de la tarjeta
   isFlipped: boolean = false;
-  isSignUpActive: boolean = false; // Controla el estado de la vista
+  isSignUpActive: boolean = false;
 
   toggleForm(): void {
     this.isSignUpActive = !this.isSignUpActive;
@@ -28,45 +29,32 @@ export class InicioSesionComponent {
     this.isFlipped = !this.isFlipped;
   }
 
+  // Propiedad para almacenar la información del usuario (opcional aquí)
   usuarioPerfil?: Usuario;
 
-  // Parte del inicio de sesion del usuario
+  // Inicio de sesión
   usuarioLogin: LoginUsuario = {
     correoElectronicoUsu: '',
     contraseniaUsu: '',
   };
 
-  iniciarSesion() {
-    this.usuarioServicio.inicioSesion(this.usuarioLogin).subscribe(
-      (response: Usuario) => {
-        console.log('Inicio de sesión exitoso', response);
-
-        // Guardar los datos del usuario en la variable
-        this.usuarioPerfil = response;
-
-        // Opcional: Guardar en el localStorage para que persista tras recargas
-        localStorage.setItem('usuario', JSON.stringify(response));
-
-        // Redirigir a la página principal o dashboard
-        this.router.navigate(['']);
+  inicioSesion2() {
+    this.usuarioServicio.obtenerUsuario(this.usuarioLogin).subscribe({
+      next: (perfilUsuario) => {
+        console.log(perfilUsuario);
+        if (perfilUsuario) {
+          // Guarda el usuario en el servicio compartido
+          this.usuarioServicio.usuarioPerfil = perfilUsuario;
+          this.router.navigate(['']); // Redirecciona a la ruta deseada
+        }
       },
-      (error) => {
-        console.error('Error al iniciar sesión', error);
-      }
-    );
+      error: (error) => {
+        console.error('Error en el inicio de sesión', error);
+      },
+    });
   }
 
-  async inicioSesion2() {
-    try {
-      const perfilUsuario = await this.usuarioServicio.obtenerUsuario(
-        this.usuarioLogin
-      );
-      console.log(perfilUsuario);
-    } catch {
-      console.error('error');
-    }
-  }
-
+  // Registro de usuario
   usuarioRegistro: RegistroUsuario = {
     nombreCompletoUsu: '',
     aliasUsu: '',
@@ -84,28 +72,20 @@ export class InicioSesionComponent {
     //   alert('La contraseña debe tener al menos 6 caracteres');
     //   return;
     // }
-
     if (this.usuarioRegistro.aliasUsu.length > 10) {
       alert('El alias no puede tener más de 10 caracteres');
       return;
     }
 
-    this.usuarioServicio.registro(this.usuarioRegistro).subscribe(
-      (response: Usuario) => {
+    this.usuarioServicio.registro(this.usuarioRegistro).subscribe({
+      next: (response: Usuario) => {
         console.log('Registro exitoso', response);
-
-        // Guardar los datos del usuario
-        this.usuarioPerfil = response;
-
-        // Opcional: Guardar en localStorage para persistencia
-        localStorage.setItem('usuario', JSON.stringify(response));
-
-        // Redirigir al dashboard o página de bienvenida
+        this.usuarioServicio.usuarioPerfil = response;
         this.router.navigate(['']);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error al registrar usuario', error);
-      }
-    );
+      },
+    });
   }
 }

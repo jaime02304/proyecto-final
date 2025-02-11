@@ -5,10 +5,11 @@
                 <form (ngSubmit)="registrar()">
                     <h2 class="registroTitulo">Registrarse</h2>
                     <input type="text" placeholder="Nombre Completo" required
-                        [(ngModel)]="usuarioRegistro.nombreCompletoUsu" /> <input type="text" placeholder="Alias"
-                        required [(ngModel)]="usuarioRegistro.aliasUsu" /> <input type="email"
-                        placeholder="Correo electrónico" required [(ngModel)]="usuarioRegistro.correoElectronicoUsu" />
-                    <input type="password" placeholder="Contraseña" required
+                        [(ngModel)]="usuarioRegistro.nombreCompletoUsu" name="nombreCompletoUsu" /> <input type="text"
+                        placeholder="Alias" required [(ngModel)]="usuarioRegistro.aliasUsu" name="aliasUsu" /> <input
+                        type="email" placeholder="Correo electrónico" required
+                        [(ngModel)]="usuarioRegistro.correoElectronicoUsu" name="correoElectronicoUsu" />
+                    <input type="password" placeholder="Contraseña" name="contraseniaUsu" required
                         [(ngModel)]="usuarioRegistro.contraseniaUsu" /> <input type="password"
                         placeholder="Repetir contraseña" />
                     <div class="debajoDeLosInputs">
@@ -25,8 +26,9 @@
                 <form (ngSubmit)="inicioSesion2()">
                     <h2 class="inicioSesionTitulo">Inicio sesion</h2>
                     <input type="email" placeholder="Correo electrónico" required
-                        [(ngModel)]="usuarioLogin.correoElectronicoUsu" /> <input type="password"
-                        placeholder="Contraseña" required [(ngModel)]="usuarioLogin.contraseniaUsu" />
+                        [(ngModel)]="usuarioLogin.correoElectronicoUsu" name="correoElectronicoUsu" /> <input
+                        type="password" placeholder="Contraseña" required [(ngModel)]="usuarioLogin.contraseniaUsu"
+                        name="contraseniaUsu" />
                     <div class="debajoDeLosInputs">
                         <div class="social-contenedor">
                             <a href="#" class="social"><i class="fab fa-google"></i></a>
@@ -62,10 +64,12 @@
         <div class="form-container capacidadMinima" [ngClass]="{ 'flip': isFlipped }" id="formContainer">
             <div class="form-inner">
                 <!-- Formulario Frontal -->
-                <form class="form formsm">
+                <form class="form formsm" (ngSubmit)="inicioSesion2()">
                     <h2 class="inicioSesionTitulo1">Inicio sesion</h2>
-                    <input type="email" placeholder="C o r r e o  e l e c t r ó n i c o" required /> <input
-                        type="password" placeholder="C o n t r a s e ñ a" required />
+                    <input type="email" placeholder="C o r r e o  e l e c t r ó n i c o" name="correoElectronicoUsu"
+                        required [(ngModel)]="usuarioLogin.correoElectronicoUsu" /> <input type="password"
+                        [(ngModel)]="usuarioLogin.contraseniaUsu" placeholder="C o n t r a s e ñ a" required
+                        name="contraseniaUsu" />
                     <div class="debajoDeLosInputs1">
                         <div class="social-contenedor">
                             <a href="#" class="social1"><i class="fab fa-google"></i></a>
@@ -80,10 +84,13 @@
                 <!-- Formulario Trasero -->
                 <form class="form1 form-back formsm">
                     <h2 class="registroTitulo1">Registrarse</h2>
-                    <input type="text" placeholder="N o m b r e  c o m p l e t o" required /> <input type="text"
-                        placeholder="A l i a s" required /> <input type="email"
-                        placeholder="C o r r e o  e l e c t r ó n i c o" required /> <input type="password"
-                        placeholder="C o n t r a s e ñ a" required /> <input type="password"
+                    <input type="text" [(ngModel)]="usuarioRegistro.nombreCompletoUsu"
+                        placeholder="N o m b r e  c o m p l e t o" required name="nombreCompletoUsu" />
+                    <input type="text" [(ngModel)]="usuarioRegistro.aliasUsu" placeholder="A l i a s" required
+                        name="aliasUsu" /> <input type="email" placeholder="C o r r e o  e l e c t r ó n i c o"
+                        [(ngModel)]="usuarioRegistro.correoElectronicoUsu" required name="correoElectronicoUsu" />
+                    <input type="password" placeholder="C o n t r a s e ñ a" required
+                        [(ngModel)]="usuarioRegistro.contraseniaUsu" name="contraseniaUsu" /> <input type="password"
                         placeholder="R e p e t i r  c o n t r a s e ñ a" />
                     <div class="social-contenedor3">
                         <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
