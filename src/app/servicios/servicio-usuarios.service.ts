@@ -1,37 +1,63 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LoginUsuario, RegistroUsuario, Usuario } from '../modelos/usuario';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ServicioUsuariosService {
-  private userSubject = new BehaviorSubject<any | null>(null);
-  private apiUrl = 'http://localhost:8081/api/usuario'; // URL base de la API
-  usuarioPerfil$?: Observable<Usuario | null> = this.userSubject.asObservable();
+  private apiUrl = 'http://localhost:8081/api'; // URL base de la API
+  private userSubject = new BehaviorSubject<Usuario | null>(
+    this.cargarUsuarioDesdeLocalStorage()
+  );
+  usuarioPerfil$ = this.userSubject.asObservable();
 
   private http = inject(HttpClient);
 
+  constructor() {}
+
   // Método para iniciar sesión
-  obtenerUsuario(datos: LoginUsuario) {
-    this.http
-      .post(`${this.apiUrl}/inicioSesion`, datos)
-      .subscribe((usuario) => {
+  obtenerUsuario(datos: LoginUsuario): Observable<Usuario> {
+    return this.http.post<Usuario>(`${this.apiUrl}/usuario/inicioSesion`, datos).pipe(
+      tap((usuario) => {
         this.setUser(usuario);
-      });
+      })
+    );
   }
 
-  // Método para registrar un nuevo usuario
-  registro(datos: RegistroUsuario) {
-    return this.http
-      .post(`${this.apiUrl}/registro`, datos)
-      .subscribe((usuario) => {
+  // Método para registrar usuario
+  registro(datos: RegistroUsuario): Observable<Usuario> {
+    return this.http.post<Usuario>(`${this.apiUrl}/usuario/registro`, datos).pipe(
+      tap((usuario) => {
         this.setUser(usuario);
-      });
+      })
+    );
   }
 
-  setUser(dataUsuario: any) {
-    this.userSubject.next(dataUsuario);
+  // obtenerGruposUsuario(datos:any):Observable<any>{
+  //    return this.http.post<Usuario>(`${this.apiUrl}/usuario/registro`, datos).pipe(
+  //     tap((usuario) => {
+  //       this.setUser(usuario);
+  //     })
+  //   );;
+  // }
+
+  // Guarda el usuario en BehaviorSubject y localStorage
+  private setUser(usuario: Usuario) {
+    this.userSubject.next(usuario);
+    localStorage.setItem('usuario', JSON.stringify(usuario)); // Guarda en localStorage
+  }
+
+  // Cargar usuario desde localStorage
+  private cargarUsuarioDesdeLocalStorage(): Usuario | null {
+    const usuarioGuardado = localStorage.getItem('usuario');
+    return usuarioGuardado ? JSON.parse(usuarioGuardado) : null;
+  }
+
+  // Método para cerrar sesión
+  cerrarSesion() {
+    this.userSubject.next(null);
+    localStorage.removeItem('usuario'); // Elimina el usuario de localStorage
   }
 }

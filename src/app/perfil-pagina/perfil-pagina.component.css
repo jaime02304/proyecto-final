@@ -1273,7 +1273,6 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: start;
-  overflow-y: auto;
 }
 
 .contenedorMainPerfil {
@@ -1405,7 +1404,7 @@ html {
 }
 
 .ValidarUsuario {
-  margin: 30px;
+  margin: 20px;
   width: 120px;
   text-align: center;
 }
@@ -1416,7 +1415,7 @@ html {
 }
 
 .hacersePremiumBoton {
-  margin: 30px;
+  margin: 20px;
   width: 120px;
   text-align: center;
 }

@@ -22,13 +22,25 @@ import { Usuario } from '../modelos/usuario';
 export class MenuNavegadorComponent {
   @ViewChild('menuToggle') menuToggle!: ElementRef;
   @ViewChild('menuOpciones') menuOpciones!: ElementRef;
+
   menuVisible = false;
-  usuarioServicio = inject(ServicioUsuariosService);
-  isLoggedIn: boolean = false;
-  isAdmin: boolean = false;
+  usuario$: Observable<Usuario | null>;
+  usuarioPerfil?: Usuario | null;
+  private servicioUsuario = inject(ServicioUsuariosService);
+
+  constructor() {
+    this.usuario$ = this.servicioUsuario.usuarioPerfil$;
+    this.usuario$.subscribe((user) => {
+      this.usuarioPerfil = user;
+    });
+  }
 
   toggleMenu() {
     this.menuVisible = !this.menuVisible;
+  }
+
+  cerrarSesion() {
+    this.servicioUsuario.cerrarSesion();
   }
 
   @HostListener('document:click', ['$event'])
@@ -41,16 +53,5 @@ export class MenuNavegadorComponent {
     ) {
       this.menuVisible = false;
     }
-  }
-
-  usuario$?: Observable<Usuario | null>;
-  usuarioPerfil?: Usuario|null;
-  private servicioUsuario = inject(ServicioUsuariosService);
-
-  constructor() {
-    this.usuario$ = this.servicioUsuario.usuarioPerfil$;
-   this.usuario$?.subscribe(user=>{
-    this.usuarioPerfil=user;
-   })
   }
 }

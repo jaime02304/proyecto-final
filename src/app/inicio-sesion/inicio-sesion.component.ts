@@ -18,10 +18,6 @@ export class InicioSesionComponent {
   router = inject(Router);
   user$?: Observable<Usuario | null>;
 
-  constructor() {
-    this.user$ = this.usuarioServicio.usuarioPerfil$;
-  }
-
   // Variables para el efecto de la tarjeta
   isFlipped: boolean = false;
   isSignUpActive: boolean = false;
@@ -44,7 +40,14 @@ export class InicioSesionComponent {
   };
 
   inicioSesion2() {
-    this.usuarioServicio.obtenerUsuario(this.usuarioLogin);
+    this.usuarioServicio.obtenerUsuario(this.usuarioLogin).subscribe(
+      () => {
+        this.router.navigate(['/']);
+      },
+      (error) => {
+        alert('Error en el inicio de sesión');
+      }
+    );
   }
 
   // Registro de usuario
@@ -65,20 +68,19 @@ export class InicioSesionComponent {
       alert('La contraseña debe tener al menos 6 caracteres');
       return;
     }
+
     if (this.usuarioRegistro.aliasUsu.length > 10) {
       alert('El alias no puede tener más de 10 caracteres');
       return;
     }
 
-    this.usuarioServicio.registro(this.usuarioRegistro).subscribe({
-      next: (response: Usuario) => {
-        console.log('Registro exitoso', response);
-        this.usuarioServicio.usuarioPerfil$ = response;
-        this.router.navigate(['']);
+    this.usuarioServicio.registro(this.usuarioRegistro).subscribe(
+      () => {
+        this.router.navigate(['/']);
       },
-      error: (error) => {
-        console.error('Error al registrar usuario', error);
-      },
-    });
+      (error) => {
+        alert('Error en el registro');
+      }
+    );
   }
 }

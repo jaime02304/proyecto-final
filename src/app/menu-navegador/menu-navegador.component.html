@@ -1,68 +1,172 @@
 <header class="header d-none d-md-block">
-    <nav class="navegadorPrincipal">
-        <div class="contenedorPrincipal">
-            <div class="logo-contenedor">
-                <a [routerLink]="['']" routerLinkActive="router-link-active">
-                    <img class="imagenLogo" src="imagenes/Modified_Image_Pure_Black_Background.png"
-                        alt="Logo de la pagina web" width="200px" />
-                </a>
-            </div>
-            <!-- Columna de los botones (a la derecha) -->
-            <div class="boton-contenedor">
-                <a [routerLink]="['']" routerLinkActive="router-link-active"><button
-                        class="botonNavegador botonGrupo">GRUPOS</button></a>
-                <a [routerLink]="['']" routerLinkActive="router-link-active"> <button
-                        class="botonNavegador botonAnime d-xl-block d-none">ANIMES</button></a>
-                <a [routerLink]="['']" routerLinkActive="router-link-active"><button
-                        class="botonNavegador botonVideojuegos d-xl-block d-none">
-                        VIDEOJUEGOS
-                    </button></a>
-                <a [routerLink]="['']" routerLinkActive="router-link-active"> <button
-                        class="botonNavegador botonCategoria d-xl-none d-md-block d-none">
-                        CATEGORÍA
-                    </button></a>
-                <!-- Aqui deberia de poner una condicion que si es admin coja una cosa y si no que haga la otra -->
-                @if (!usuario$) {
-                <button class="botonIconoIS" [routerLink]="['/inicio-sesion']" routerLinkActive="router-link-active">
-                    <i class="fas fa-user icono"></i></button>
-                }@else {
-                @if (!usuarioPerfil?.rolUsu) {
-                <button [routerLink]="['']" routerLinkActive="router-link-active"
-                    class="botonNavegador ">PERFIL</button>
-                }@else {
-                <button [routerLink]="['']" routerLinkActive="router-link-active"
-                    class="botonNavegador botonAdmin">ADMIN</button>
-                }
-                }
-            </div>
-        </div>
-    </nav>
+  <nav class="navegadorPrincipal">
+    <div class="contenedorPrincipal">
+      <div class="logo-contenedor">
+        <a [routerLink]="['']" routerLinkActive="router-link-active">
+          <img
+            class="imagenLogo"
+            src="imagenes/Modified_Image_Pure_Black_Background.png"
+            alt="Logo de la pagina web"
+            width="200px"
+          />
+        </a>
+      </div>
+      <!-- Columna de los botones (a la derecha) -->
+      <div class="boton-contenedor">
+        <a [routerLink]="['']" routerLinkActive="router-link-active"
+          ><button class="botonNavegador botonGrupo" (click)="cerrarSesion()">GRUPOS</button></a
+        >
+        <a [routerLink]="['']" routerLinkActive="router-link-active">
+          <button class="botonNavegador botonAnime d-xl-block d-none">
+            ANIMES
+          </button></a
+        >
+        <a [routerLink]="['']" routerLinkActive="router-link-active"
+          ><button class="botonNavegador botonVideojuegos d-xl-block d-none">
+            VIDEOJUEGOS
+          </button></a
+        >
+        <a [routerLink]="['']" routerLinkActive="router-link-active">
+          <button
+            class="botonNavegador botonCategoria d-xl-none d-md-block d-none"
+          >
+            CATEGORÍA
+          </button></a
+        >
+        <!-- Aqui deberia de poner una condicion que si es admin coja una cosa y si no que haga la otra -->
+        <ng-container *ngIf="usuarioPerfil; else sinUsuario">
+          <ng-container
+            *ngIf="usuarioPerfil.rolUsu === 'user'; else checkAdmin"
+          >
+            <button
+              [routerLink]="['/pagina-perfil']"
+              routerLinkActive="router-link-active"
+              class="botonNavegador"
+            >
+              PERFIL
+            </button>
+          </ng-container>
+
+          <ng-template #checkAdmin>
+            <ng-container *ngIf="usuarioPerfil.rolUsu === 'admin'; else sAdmin">
+              <button
+                [routerLink]="['/admin']"
+                routerLinkActive="router-link-active"
+                class="botonNavegador"
+              >
+                ADMIN
+              </button>
+            </ng-container>
+          </ng-template>
+
+          <ng-template #sAdmin>
+            <button
+              [routerLink]="['/sadmin']"
+              routerLinkActive="router-link-active"
+              class="botonNavegador"
+            >
+              SUPER ADMIN
+            </button>
+          </ng-template>
+        </ng-container>
+
+        <ng-template #sinUsuario>
+          <button
+            class="botonIconoIS"
+            [routerLink]="['/inicio-sesion']"
+            routerLinkActive="router-link-active"
+          >
+            <i class="fas fa-user icono"></i>
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </nav>
 </header>
 
 <!-- Este header es para la parte de moviles y tablest pequeñas-->
 <header class="header d-block d-md-none">
-    <nav class="navegadorPrincipalS">
-        <div class="contenedorPrincipal">
-            <div class="logo-contenedor">
-                <a [routerLink]="['']" routerLinkActive="router-link-active">
-                    <img class="imagenLogo2" src="imagenes/Modified_Image_Pure_Black_Background.png"
-                        alt="Logo de la pagina web" width="200px" />
-                </a>
-            </div>
+  <nav class="navegadorPrincipalS">
+    <div class="contenedorPrincipal">
+      <div class="logo-contenedor">
+        <a [routerLink]="['']" routerLinkActive="router-link-active">
+          <img
+            class="imagenLogo2"
+            src="imagenes/Modified_Image_Pure_Black_Background.png"
+            alt="Logo de la pagina web"
+            width="200px"
+          />
+        </a>
+      </div>
 
-            <!-- MENU-->
-            <div class="boton-contenedor2">
-                <button #menuToggle (click)="toggleMenu()" class="botonNavegador2 d-block d-md-none" id="menuToggle">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <div class="menu-desplegable menu" id="menuOpciones" #menuOpciones
-                    [style.display]="menuVisible ? 'block' : 'none'">
-                    <a [routerLink]="['']" routerLinkActive="router-link-active">GRUPOS</a>
-                    <a [routerLink]="['']" routerLinkActive="router-link-active">CATEGORÍA</a>
-                    <!--AQUI DEBERIA DE PONER LA CONDICION EN LA CUAL SI SE INICIA SESION PONDRA PERFIL USUARIO O PERFIL ADMINISTRADOR-->
-                    <a [routerLink]="['/inicio-sesion']" routerLinkActive="router-link-active">INICIAR SESION</a>
-                </div>
-            </div>
+      <!-- MENU -->
+      <div class="boton-contenedor2">
+        <button
+          #menuToggle
+          (click)="toggleMenu()"
+          class="botonNavegador2 d-block d-md-none"
+          id="menuToggle"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div
+          class="menu-desplegable menu"
+          id="menuOpciones"
+          #menuOpciones
+          [style.display]="menuVisible ? 'block' : 'none'"
+        >
+          <a [routerLink]="['']" routerLinkActive="router-link-active" (click)="cerrarSesion()"
+            >GRUPOS</a
+          >
+          <a [routerLink]="['']" routerLinkActive="router-link-active"
+            >CATEGORÍA</a
+          >
+          <!-- Condición para mostrar Perfil de Usuario o Admin -->
+          <ng-container *ngIf="usuarioPerfil; else sinUsu">
+            <ng-container
+              *ngIf="usuarioPerfil.rolUsu === 'user'; else checkAdmin"
+            >
+              <a
+                [routerLink]="['/pagina-perfil']"
+                routerLinkActive="router-link-active"
+              >
+                PERFIL
+              </a>
+            </ng-container>
+
+            <ng-template #checkAdmin>
+              <ng-container
+                *ngIf="usuarioPerfil.rolUsu === 'admin'; else superAdmin"
+              >
+                <a
+                  [routerLink]="['/admin']"
+                  routerLinkActive="router-link-active"
+                >
+                  ADMIN
+                </a>
+              </ng-container>
+            </ng-template>
+
+            <ng-template #superAdmin>
+              <a
+                [routerLink]="['/sadmin']"
+                routerLinkActive="router-link-active"
+              >
+                ADMIN
+              </a>
+            </ng-template>
+          </ng-container>
+
+          <ng-template #sinUsu>
+            <a
+              [routerLink]="['/inicio-sesion']"
+              routerLinkActive="router-link-active"
+            >
+              INICIAR SESIÓN
+            </a>
+          </ng-template>
         </div>
-    </nav>
+      </div>
+    </div>
+  </nav>
 </header>
