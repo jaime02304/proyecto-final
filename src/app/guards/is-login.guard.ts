@@ -6,7 +6,7 @@ export const isLoginGuard: CanActivateFn = (route, state) => {
   const servicioUsuario = inject(ServicioUsuariosService);
   const router = inject(Router);
 
-  if (servicioUsuario.usuarioPerfil) {
+  if (servicioUsuario.usuarioPerfil$) {
     return true;
   }
   router.navigate(['/inicio-sesion'])

@@ -9,6 +9,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ServicioUsuariosService } from '../servicios/servicio-usuarios.service';
+import { Observable } from 'rxjs';
+import { Usuario } from '../modelos/usuario';
 
 @Component({
   selector: 'app-menu-navegador',
@@ -41,7 +43,14 @@ export class MenuNavegadorComponent {
     }
   }
 
-  // ngOnInit() {
-  //   this.usuarioServicio.
-  // }
+  usuario$?: Observable<Usuario | null>;
+  usuarioPerfil?: Usuario|null;
+  private servicioUsuario = inject(ServicioUsuariosService);
+
+  constructor() {
+    this.usuario$ = this.servicioUsuario.usuarioPerfil$;
+   this.usuario$?.subscribe(user=>{
+    this.usuarioPerfil=user;
+   })
+  }
 }

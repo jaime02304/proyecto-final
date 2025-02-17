@@ -22,3 +22,4 @@ export interface RegistroUsuario {
   correoElectronicoUsu: string;
   contraseniaUsu: string;
 }
+

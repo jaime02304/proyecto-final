@@ -4,7 +4,7 @@ import { LoginUsuario, RegistroUsuario, Usuario } from '../modelos/usuario';
 import { ServicioUsuariosService } from '../servicios/servicio-usuarios.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { lastValueFrom } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -16,6 +16,11 @@ import { lastValueFrom } from 'rxjs';
 export class InicioSesionComponent {
   private usuarioServicio = inject(ServicioUsuariosService);
   router = inject(Router);
+  user$?: Observable<Usuario | null>;
+
+  constructor() {
+    this.user$ = this.usuarioServicio.usuarioPerfil$;
+  }
 
   // Variables para el efecto de la tarjeta
   isFlipped: boolean = false;
@@ -39,19 +44,7 @@ export class InicioSesionComponent {
   };
 
   inicioSesion2() {
-    this.usuarioServicio.obtenerUsuario(this.usuarioLogin).subscribe({
-      next: (perfilUsuario) => {
-        console.log(perfilUsuario);
-        if (perfilUsuario) {
-          // Guarda el usuario en el servicio compartido
-          this.usuarioServicio.usuarioPerfil = perfilUsuario;
-          this.router.navigate(['']); // Redirecciona a la ruta deseada
-        }
-      },
-      error: (error) => {
-        console.error('Error en el inicio de sesión', error);
-      },
-    });
+    this.usuarioServicio.obtenerUsuario(this.usuarioLogin);
   }
 
   // Registro de usuario
@@ -68,10 +61,10 @@ export class InicioSesionComponent {
       return;
     }
 
-    // if (this.usuarioRegistro.contraseniaUsu.length < 6) {
-    //   alert('La contraseña debe tener al menos 6 caracteres');
-    //   return;
-    // }
+    if (this.usuarioRegistro.contraseniaUsu.length < 6) {
+      alert('La contraseña debe tener al menos 6 caracteres');
+      return;
+    }
     if (this.usuarioRegistro.aliasUsu.length > 10) {
       alert('El alias no puede tener más de 10 caracteres');
       return;
@@ -80,7 +73,7 @@ export class InicioSesionComponent {
     this.usuarioServicio.registro(this.usuarioRegistro).subscribe({
       next: (response: Usuario) => {
         console.log('Registro exitoso', response);
-        this.usuarioServicio.usuarioPerfil = response;
+        this.usuarioServicio.usuarioPerfil$ = response;
         this.router.navigate(['']);
       },
       error: (error) => {
