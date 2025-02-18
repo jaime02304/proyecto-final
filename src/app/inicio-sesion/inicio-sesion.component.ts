@@ -73,6 +73,7 @@ export class InicioSesionComponent {
       alert('El alias no puede tener más de 10 caracteres');
       return;
     }
+    // this.usuarioRegistro.contraseniaUsu;
 
     this.usuarioServicio.registro(this.usuarioRegistro).subscribe(
       () => {
@@ -83,4 +84,5 @@ export class InicioSesionComponent {
       }
     );
   }
+
 }

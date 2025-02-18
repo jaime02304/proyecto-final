@@ -7,11 +7,7 @@
         <div class="encabezado">
           <div class="divImagenPerfil">
             <ng-container *ngIf="usuario?.fotoUsu; else noAvatar">
-              <img
-                [src]="usuario?.fotoUsu"
-                alt="Foto Perfil del usuario"
-                class="imagenUsuPerfil"
-              />
+              <img [src]="usuario?.fotoUsu" alt="Foto Perfil del usuario" class="imagenUsuPerfil" />
             </ng-container>
             <ng-template #noAvatar>
               <div class="imagenUsuPerfil">No Avatar</div>
@@ -20,11 +16,7 @@
           <div class="divAliasPerfil">
             <h1 class="aliasPerfil">{{ usuario?.aliasUsu || "ALIAS" }}</h1>
           </div>
-          <button
-            type="button"
-            class="botonModificador"
-            (click)="openFormularioModal()"
-          >
+          <button type="button" class="botonModificador" (click)="openFormularioModal()">
             <i class="fa-solid fa-pen"></i>
           </button>
         </div>
@@ -57,22 +49,14 @@
             </h3>
           </div>
           <div class="ContenedorDatosPerfil">
-            <button [routerLink]="['']" routerLinkActive="router-link-active" 
-              class="hacersePremiumBoton botonNavegador"
-              (click)="cerrarSesion()"
-            >
+            <button [routerLink]="['']" routerLinkActive="router-link-active" class="hacersePremiumBoton botonNavegador"
+              (click)="cerrarSesion()">
               Cerrar
             </button>
-            <button
-              class="ValidarUsuario botonNavegador"
-              *ngIf="usuario && !usuario.esVerificadoEntidad"
-            >
+            <button class="ValidarUsuario botonNavegador" *ngIf="usuario && !usuario.esVerificadoEntidad">
               Validar
             </button>
-            <button
-              class="hacersePremiumBoton botonNavegador"
-              (click)="alertaDelPremium()"
-            >
+            <button class="hacersePremiumBoton botonNavegador" (click)="alertaDelPremium()">
               Premium
             </button>
           </div>
@@ -80,26 +64,21 @@
       </div>
       <!-- Columna derecha: Vista exclusiva para rol "user" -->
       <!-- Columna derecha: Vista exclusiva para rol "user" -->
-      <!-- <div class="col-6" *ngIf="usuario?.rolUsu === 'user'">
+      <div class="col-6" *ngIf="usuario?.rolUsu === 'user'">
         <div class="row contenedorDosPerfil">
-           Sección de Grupos
+          <!-- Sección de Grupos -->
           <div class="col contenedorInfoPerfilDerecho contenedorGruposB">
             <h3>Grupos</h3>
-            <ng-container
-              *ngIf="listadoGruposUsuario?.length === 0; else gruposUsuario"
-            >
+            <ng-container *ngIf="hayMensaje; else gruposUsuario">
               <div class="mensajeGrupo">
                 No se encontraron grupos disponibles.
               </div>
               <div class="tiposMensaje">
-                <button (click)="openCreacionGrupoModal()">Crear Grupo</button>
+                <button>Crear Grupo</button>
               </div>
             </ng-container>
             <ng-template #gruposUsuario>
-              <div
-                *ngFor="let grupo of listadoGruposUsuario"
-                class="trozoGrupo"
-              >
+              <div *ngFor="let grupo of listadoGruposUsuario" class="trozoGrupo">
                 <div class="NombreGrupo">{{ grupo.nombreGrupo }}</div>
                 <div class="categoriaGrupo">{{ grupo.categoriaNombre }}</div>
                 <div class="tematicaGrupo">{{ grupo.subCategoriaNombre }}</div>
@@ -108,13 +87,13 @@
                 </div>
               </div>
               <div class="tiposMensaje">
-                <button (click)="openCreacionGrupoModal()">Crear Grupo</button>
+                <button>Crear Grupo</button>
               </div>
             </ng-template>
           </div>
 
-          Sección de Comentarios
-          <div class="col contenedorInfoPerfilDerechoB">
+          <!-- Sección de Comentarios -->
+          <!-- <div class="col contenedorInfoPerfilDerechoB">
             <div class="contenidoMensaje">
               <div class="contenidoMensaje2">
                 <ng-container
@@ -140,51 +119,40 @@
                 <button>Crear</button>
               </div>
             </ng-template>
-          </div>
+          </div>-->
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 
-  <!-- Versión para móvil (similar, adaptando clases responsive) -->
-  <div
-    class="container contenedorPrincipalPerfil d-block d-lg-none"
-    *ngIf="usuario?.rolUsu === 'user'"
-  >
-    <!-- Aquí se puede replicar la estructura adaptada para móvil -->
+  <!-- Sección inferior: Grupos y Comentarios para el usuario -->
+  <!-- Versión para móvil -->
+  <div class="container contenedorPrincipalPerfil d-block d-lg-none" *ngIf="usuario?.rolUsu === 'user'">
     <div class="row columnaPrincipal">
       <!-- Información de perfil -->
-      <div class="col contenedorInfoPerfil">
+      <div class="col-12 contenedorInfoPerfil">
         <div class="encabezado">
-          <!-- Imagen de perfil -->
           <div class="divImagenPerfil">
             <ng-container *ngIf="usuario?.fotoUsu; else noAvatarMobile">
-              <img
-                [src]="usuario?.fotoUsu"
-                alt="Foto Perfil del usuario"
-                class="imagenUsuPerfil"
-              />
+              <img [src]="usuario?.fotoUsu" alt="Foto Perfil" class="imagenUsuPerfil" />
             </ng-container>
             <ng-template #noAvatarMobile>
-              <div class="imagenUsuPerfil">no Avatar</div>
+              <div class="imagenUsuPerfil">No Avatar</div>
             </ng-template>
           </div>
-          <!-- Alias -->
           <div class="divAliasPerfil">
             <h1 class="aliasPerfil">{{ usuario?.aliasUsu || "ALIAS" }}</h1>
           </div>
-          <button
-            type="button"
-            class="botonModificador"
-            (click)="openFormularioModal()"
-          >
+          <button type="button" class="botonModificador" (click)="openFormularioModal()">
             <i class="fa-solid fa-pen"></i>
           </button>
         </div>
         <div class="ContenedorCompleto">
           <div class="ContenedorDatosPerfilB">
             <h3 class="DatosPerfil2">Nombre Completo:</h3>
-            <h3 class="DatosPerfilInfo2">{{ usuario?.nombreCompletoUsu }}</h3>
+            <h3 class="DatosPerfilInfo2">
+              {{ usuario?.nombreCompletoUsu }}
+            </h3>
           </div>
           <div class="ContenedorDatosPerfilB">
             <h3 class="DatosPerfil2">Teléfono Móvil:</h3>
@@ -207,159 +175,60 @@
           </div>
           <div class="ContenedorDatosPerfil2">
             <div class="divBoton">
-              <a [routerLink]="['']">
+              <a [routerLink]="['/CerrarSesion']">
                 <button class="hacersePremiumBoton2 botonNavegador" (click)="cerrarSesion()">
                   Cerrar
                 </button>
               </a>
             </div>
             <div class="divBoton">
-              <button
-                class="hacersePremiumBoton2 botonNavegador"
-                (click)="alertaDelPremium()"
-              >
+              <button class="hacersePremiumBoton2 botonNavegador" (click)="alertaDelPremium()">
                 Premium
               </button>
             </div>
             <div class="divBoton" *ngIf="!usuario?.esVerificadoEntidad">
-              <button class="ValidarUsuario2 botonNavegador">Validar</button>
+              <button class="ValidarUsuario2 botonNavegador">
+                Validar
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Sección inferior: Grupos y Comentarios para el usuario -->
-      <!-- Versión para móvil -->
-      <div
-        class="container contenedorPrincipalPerfil d-block d-lg-none"
-        *ngIf="usuario?.rolUsu === 'user'"
-      >
-        <div class="row columnaPrincipal">
-          <!-- Información de perfil -->
-          <div class="col contenedorInfoPerfil">
-            <div class="encabezado">
-              <div class="divImagenPerfil">
-                <ng-container *ngIf="usuario?.fotoUsu; else noAvatarMobile">
-                  <img
-                    [src]="usuario?.fotoUsu"
-                    alt="Foto Perfil"
-                    class="imagenUsuPerfil"
-                  />
-                </ng-container>
-                <ng-template #noAvatarMobile>
-                  <div class="imagenUsuPerfil">No Avatar</div>
-                </ng-template>
-              </div>
-              <div class="divAliasPerfil">
-                <h1 class="aliasPerfil">{{ usuario?.aliasUsu || "ALIAS" }}</h1>
-              </div>
-              <button
-                type="button"
-                class="botonModificador"
-                (click)="openFormularioModal()"
-              >
-                <i class="fa-solid fa-pen"></i>
-              </button>
+      <!-- Grupos y Comentarios -->
+      <!-- Grupos del usuario -->
+      <div class="col contenedorInfoPerfilDerecho contenedorGruposB">
+        <h3>Grupos</h3>
+        <ng-container *ngIf="hayMensaje; else gruposUsuarioMobile">
+          <div class="mensajeGrupo">
+            No se encontraron grupos disponibles.
+          </div>
+          <div class="tiposMensaje">
+            <button>
+              Crear Grupo
+            </button>
+          </div>
+        </ng-container>
+        <ng-template #gruposUsuarioMobile>
+          <div *ngFor="let grupo of listadoGruposUsuario" class="trozoGrupo">
+            <div class="NombreGrupo">{{ grupo.nombreGrupo }}</div>
+            <div class="categoriaGrupo">{{ grupo.categoriaNombre }}</div>
+            <div class="tematicaGrupo">
+              {{ grupo.subCategoriaNombre }}
             </div>
-            <div class="ContenedorCompleto">
-              <div class="ContenedorDatosPerfilB">
-                <h3 class="DatosPerfil2">Nombre Completo:</h3>
-                <h3 class="DatosPerfilInfo2">
-                  {{ usuario?.nombreCompletoUsu }}
-                </h3>
-              </div>
-              <div class="ContenedorDatosPerfilB">
-                <h3 class="DatosPerfil2">Teléfono Móvil:</h3>
-                <h3 class="DatosPerfilInfo2">{{ usuario?.movilUsu }}</h3>
-              </div>
-              <div class="ContenedorDatosPerfilB">
-                <h3 class="DatosPerfil2">Correo:</h3>
-                <h3 class="DatosPerfilInfo2">
-                  {{ usuario?.correoElectronicoUsu }}
-                </h3>
-              </div>
-              <div class="ContenedorDatosPerfilB">
-                <h3 class="DatosPerfil2">Tipo de Usuario:</h3>
-                <h3 class="DatosPerfilInfo2">
-                  <ng-container
-                    *ngIf="usuario?.esPremium; else basicUserMobile"
-                  >
-                    Usuario Premium
-                  </ng-container>
-                  <ng-template #basicUserMobile>Usuario Básico</ng-template>
-                </h3>
-              </div>
-              <div class="ContenedorDatosPerfil2">
-                <div class="divBoton">
-                  <a [routerLink]="['/CerrarSesion']">
-                    <button
-                      class="hacersePremiumBoton2 botonNavegador"
-                      (click)="cerrarSesion()"
-                    >
-                      Cerrar
-                    </button>
-                  </a>
-                </div>
-                <div class="divBoton">
-                  <button
-                    class="hacersePremiumBoton2 botonNavegador"
-                    (click)="alertaDelPremium()"
-                  >
-                    Premium
-                  </button>
-                </div>
-                <div class="divBoton" *ngIf="!usuario?.esVerificadoEntidad">
-                  <button class="ValidarUsuario2 botonNavegador">
-                    Validar
-                  </button>
-                </div>
-              </div>
+            <div>
+              <a href="#" class="verGrupo">Ver</a>
             </div>
           </div>
+          <div class="tiposMensaje">
+            <button>
+              Crear Grupo
+            </button>
+          </div>
+        </ng-template>
+      </div>
 
-          <!-- Grupos y Comentarios -->
-          <!-- <div class="row columnaPrincipalB">
-             Grupos del usuario
-            <div class="col contenedorInfoPerfilDerecho contenedorGruposB">
-              <h3>Grupos</h3>
-              <ng-container
-                *ngIf="
-                  !listadoGruposUsuario || listadoGruposUsuario.length === 0;
-                  else gruposUsuarioMobile
-                "
-              >
-                <div class="mensajeGrupo">
-                  No se encontraron grupos disponibles.
-                </div>
-                <div class="tiposMensaje">
-                  <button (click)="openCreacionGrupoModal()">
-                    Crear Grupo
-                  </button>
-                </div>
-              </ng-container>
-              <ng-template #gruposUsuarioMobile>
-                <div
-                  *ngFor="let grupo of listadoGruposUsuario"
-                  class="trozoGrupo"
-                >
-                  <div class="NombreGrupo">{{ grupo.nombreGrupo }}</div>
-                  <div class="categoriaGrupo">{{ grupo.categoriaNombre }}</div>
-                  <div class="tematicaGrupo">
-                    {{ grupo.subCategoriaNombre }}
-                  </div>
-                  <div>
-                    <a href="#" class="verGrupo">Ver</a>
-                  </div>
-                </div>
-                <div class="tiposMensaje">
-                  <button (click)="openCreacionGrupoModal()">
-                    Crear Grupo
-                  </button>
-                </div>
-              </ng-template>
-            </div>
-
-            Comentarios del usuario
+      <!-- Comentarios del usuario
             <div class="col contenedorInfoPerfilDerechoB">
               <div class="contenidoMensaje">
                 <div class="contenidoMensaje2">
@@ -388,8 +257,6 @@
               </ng-template>
             </div>
           </div>-->
-        </div>
-      </div>
     </div>
   </div>
 </main>

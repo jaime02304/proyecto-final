@@ -1273,6 +1273,7 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: start;
+  overflow-y: auto;
 }
 
 .contenedorMainPerfil {
@@ -1286,7 +1287,6 @@ html {
   background-color: rgb(206, 206, 206);
   border: 1px solid black;
   border-radius: 20px;
-  margin: 10px;
   height: 100%;
 }
 
@@ -1452,10 +1452,6 @@ html {
   margin: 10px;
 }
 
-.contenedorInfoPerfilDerecho {
-  margin: 10px;
-}
-
 .contenedorInfoPerfilDerechoB {
   display: flex;
   justify-content: space-around;
@@ -1532,7 +1528,7 @@ html {
 .contenedorGruposB {
   width: 100%;
   height: 90%;
-  margin-top: 50px;
+  margin-top: 25px;
   border: 1px solid black;
   background-color: rgb(206, 206, 206);
   border-radius: 10px;

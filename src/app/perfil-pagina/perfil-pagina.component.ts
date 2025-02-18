@@ -4,48 +4,78 @@ import { Router, RouterModule } from '@angular/router';
 import { Usuario } from '../modelos/usuario';
 import { ServicioUsuariosService } from '../servicios/servicio-usuarios.service';
 import { PerfilServiciosService } from '../servicios/perfil-servicios.service';
+import { listadoGrupos } from '../modelos/grupos';
 
 @Component({
   selector: 'app-perfil-pagina',
   standalone: true,
-  imports: [NgIf, NgFor, RouterModule],
+  imports: [NgIf, RouterModule, NgFor],
   templateUrl: './perfil-pagina.component.html',
   styleUrl: './perfil-pagina.component.css',
 })
 export class PerfilPaginaComponent {
   usuario?: Usuario | null;
-  // listadoGruposUsuario: Grupo[] = [];
-  // comentario?: Comentario | null;
+  listadoGruposUsuario: listadoGrupos[] = [];
+  hayMensaje = false;
 
   constructor(
     private servicioUsuario: ServicioUsuariosService,
+    private servicioPerfil: PerfilServiciosService,
     private router: Router
   ) {}
 
-  ngOnInit() {
-    // Recuperar usuario de localStorage si existe
+  ngOnInit(): void {
+    // Intentar recuperar el usuario desde localStorage
     const usuarioGuardado = localStorage.getItem('usuario');
+
     if (usuarioGuardado) {
-      this.usuario = JSON.parse(usuarioGuardado);
+      // Convertimos la cadena a objeto Usuario
+      const usuarioParseado = JSON.parse(usuarioGuardado) as Usuario;
+      this.usuario = usuarioParseado;
+      // Con el usuario disponible, obtenemos sus grupos
+      this.obtenerGrupos(usuarioParseado);
     } else {
-      this.servicioUsuario.usuarioPerfil$.subscribe((user) => {
-        this.usuario = user;
+      // Si no hay usuario en localStorage, nos suscribimos al observable
+      this.servicioUsuario.usuarioPerfil$.subscribe((user: Usuario | null) => {
         if (user) {
-          localStorage.setItem('usuario', JSON.stringify(user)); // Guardar usuario en localStorage
+          this.usuario = user;
+          // Guardamos el usuario en localStorage
+          localStorage.setItem('usuario', JSON.stringify(user));
+          // Obtenemos los grupos del usuario
+          this.obtenerGrupos(user);
         }
       });
     }
+  }
 
-    // Recuperar grupos del usuario si existen en localStorage
-    // const gruposGuardados = localStorage.getItem('gruposUsuario');
-    // if (gruposGuardados) {
-    //   this.listadoGruposUsuario = JSON.parse(gruposGuardados);
-    // } else {
-    //   this.servicioUsuario.obtenerGruposUsuario().subscribe((grupos) => {
-    //     this.listadoGruposUsuario = grupos;
-    //     localStorage.setItem('gruposUsuario', JSON.stringify(grupos)); // Guardar grupos en localStorage
-    //   });
-    // }
+  // Método para obtener los grupos del usuario
+  private obtenerGrupos(usuario: Usuario): void {
+    // Intentar recuperar los grupos desde localStorage
+    const gruposGuardados = localStorage.getItem('gruposUsuario');
+
+    if (gruposGuardados) {
+      const parsed = JSON.parse(gruposGuardados);
+      // Si no es un array, conviértelo en uno
+      console.log(JSON.parse(gruposGuardados).mensaje);
+      if (JSON.parse(gruposGuardados).mensaje) {
+        this.hayMensaje = true;
+        console.log(this.hayMensaje);
+      }
+
+      this.listadoGruposUsuario = Array.isArray(parsed)
+        ? parsed
+        : Object.values(parsed);
+      console.log(this.listadoGruposUsuario);
+    } else {
+      // Si no existen en localStorage, llamamos al servicio para obtenerlos
+      this.servicioPerfil
+        .obtenerGrupo(usuario)
+        .subscribe((grupos: listadoGrupos[]) => {
+          this.listadoGruposUsuario = grupos;
+          // Si prefieres, también puedes guardar aquí los grupos:
+          //localStorage.setItem('gruposUsuario', JSON.stringify(grupos));
+        });
+    }
 
     // // Recuperar comentario si existe en localStorage
     // const comentarioGuardado = localStorage.getItem('comentarioUsuario');

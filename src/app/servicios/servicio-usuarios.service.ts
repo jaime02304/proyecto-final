@@ -19,30 +19,25 @@ export class ServicioUsuariosService {
 
   // Método para iniciar sesión
   obtenerUsuario(datos: LoginUsuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}/usuario/inicioSesion`, datos).pipe(
-      tap((usuario) => {
-        this.setUser(usuario);
-      })
-    );
+    return this.http
+      .post<Usuario>(`${this.apiUrl}/usuario/inicioSesion`, datos)
+      .pipe(
+        tap((usuario) => {
+          this.setUser(usuario);
+        })
+      );
   }
 
   // Método para registrar usuario
   registro(datos: RegistroUsuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}/usuario/registro`, datos).pipe(
-      tap((usuario) => {
-        this.setUser(usuario);
-      })
-    );
+    return this.http
+      .post<Usuario>(`${this.apiUrl}/usuario/registro`, datos)
+      .pipe(
+        tap((usuario) => {
+          this.setUser(usuario);
+        })
+      );
   }
-
-  // obtenerGruposUsuario(datos:any):Observable<any>{
-  //    return this.http.post<Usuario>(`${this.apiUrl}/usuario/registro`, datos).pipe(
-  //     tap((usuario) => {
-  //       this.setUser(usuario);
-  //     })
-  //   );;
-  // }
-
   // Guarda el usuario en BehaviorSubject y localStorage
   private setUser(usuario: Usuario) {
     this.userSubject.next(usuario);
