@@ -16,7 +16,7 @@ export class PerfilServiciosService {
 
   obtenerGrupo(datos: Usuario): Observable<listadoGrupos[]> {
     return this.http
-      .post<listadoGrupos[]>(`${this.apiUrl}/perfil/comentario`, datos)
+      .post<listadoGrupos[]>(`${this.apiUrl}/perfil/grupos`, datos)
       .pipe(
         tap((grupo:listadoGrupos[]) => {
           this.setGrupo(grupo);
