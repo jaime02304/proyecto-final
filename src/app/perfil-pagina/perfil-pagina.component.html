@@ -93,25 +93,21 @@
           </div>
 
           <!-- Sección de Comentarios -->
-          <!-- <div class="col contenedorInfoPerfilDerechoB">
+          <div class="col contenedorInfoPerfilDerechoB">
             <div class="contenidoMensaje">
               <div class="contenidoMensaje2">
-                <ng-container
-                  *ngIf="comentario?.comentarioTexto; else noComentario"
-                >
-                  {{ comentario.comentarioTexto }}
+                <ng-container *ngIf="!hayMensajeComentario; else noComentario">
+                  {{ comentarioPerfil?.comentarioTexto }}
                 </ng-container>
                 <ng-template #noComentario>
                   No se encontraron comentarios para este usuario.
                 </ng-template>
               </div>
             </div>
-            <ng-container
-              *ngIf="comentario?.comentarioTexto; else crearComentario"
-            >
+            <ng-container *ngIf="!hayMensajeComentario; else crearComentario">
               <div class="tiposMensaje">
-                <button>{{ comentario?.categoriaTipo }}</button>
-                <button>{{ comentario?.subCategoriaTipo }}</button>
+                <button>{{ comentarioPerfil?.categoriaTipo }}</button>
+                <button>{{ comentarioPerfil?.subCategoriaTipo }}</button>
               </div>
             </ng-container>
             <ng-template #crearComentario>
@@ -119,7 +115,7 @@
                 <button>Crear</button>
               </div>
             </ng-template>
-          </div>-->
+          </div>
         </div>
       </div>
     </div>
@@ -175,7 +171,7 @@
           </div>
           <div class="ContenedorDatosPerfil2">
             <div class="divBoton">
-              <a [routerLink]="['/CerrarSesion']">
+              <a [routerLink]="['/']">
                 <button class="hacersePremiumBoton2 botonNavegador" (click)="cerrarSesion()">
                   Cerrar
                 </button>
@@ -197,7 +193,7 @@
 
       <!-- Grupos y Comentarios -->
       <!-- Grupos del usuario -->
-      <div class="col contenedorInfoPerfilDerecho contenedorGruposB">
+      <div class="col-12 contenedorInfoPerfilDerecho contenedorGruposB">
         <h3>Grupos</h3>
         <ng-container *ngIf="hayMensaje; else gruposUsuarioMobile">
           <div class="mensajeGrupo">
@@ -228,35 +224,30 @@
         </ng-template>
       </div>
 
-      <!-- Comentarios del usuario
-            <div class="col contenedorInfoPerfilDerechoB">
-              <div class="contenidoMensaje">
-                <div class="contenidoMensaje2">
-                  <ng-container
-                    *ngIf="comentario?.comentarioTexto; else noComentarioMobile"
-                  >
-                    {{ comentario.comentarioTexto }}
-                  </ng-container>
-                  <ng-template #noComentarioMobile>
-                    No se encontraron comentarios para este usuario.
-                  </ng-template>
-                </div>
-              </div>
-              <ng-container
-                *ngIf="comentario?.comentarioTexto; else crearComentarioMobile"
-              >
-                <div class="tiposMensaje">
-                  <button>{{ comentario.categoriaTipo }}</button>
-                  <button>{{ comentario.subCategoriaTipo }}</button>
-                </div>
-              </ng-container>
-              <ng-template #crearComentarioMobile>
-                <div class="tiposMensaje">
-                  <button>Crear</button>
-                </div>
-              </ng-template>
-            </div>
-          </div>-->
+      <!-- Comentarios del usuario -->
+      <div class="col-12 contenedorInfoPerfilDerechoB">
+        <div class="contenidoMensaje">
+          <div class="contenidoMensaje2">
+            <ng-container *ngIf="!hayMensajeComentario; else noComentarioMobile">
+              {{ comentarioPerfil?.comentarioTexto}}
+            </ng-container>
+            <ng-template #noComentarioMobile>
+              No se encontraron comentarios para este usuario.
+            </ng-template>
+          </div>
+        </div>
+        <ng-container *ngIf="!hayMensajeComentario; else crearComentarioMobile">
+          <div class="tiposMensaje">
+            <button>{{ comentarioPerfil?.categoriaTipo }}</button>
+            <button>{{ comentarioPerfil?.subCategoriaTipo }}</button>
+          </div>
+        </ng-container>
+        <ng-template #crearComentarioMobile>
+          <div class="tiposMensaje">
+            <button>Crear</button>
+          </div>
+        </ng-template>
+      </div>
     </div>
   </div>
 </main>

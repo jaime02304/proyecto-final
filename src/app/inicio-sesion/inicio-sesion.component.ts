@@ -41,7 +41,7 @@ export class InicioSesionComponent {
 
   inicioSesion2() {
     this.usuarioServicio.obtenerUsuario(this.usuarioLogin).subscribe(
-      () => {
+      (usuario) => {
         this.router.navigate(['/']);
       },
       (error) => {
@@ -84,5 +84,7 @@ export class InicioSesionComponent {
       }
     );
   }
+
+  
 
 }

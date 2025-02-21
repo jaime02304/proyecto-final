@@ -5,6 +5,7 @@ import { Usuario } from '../modelos/usuario';
 import { ServicioUsuariosService } from '../servicios/servicio-usuarios.service';
 import { PerfilServiciosService } from '../servicios/perfil-servicios.service';
 import { listadoGrupos } from '../modelos/grupos';
+import { comentariosPerfilDto } from '../modelos/comentarios';
 
 @Component({
   selector: 'app-perfil-pagina',
@@ -16,7 +17,9 @@ import { listadoGrupos } from '../modelos/grupos';
 export class PerfilPaginaComponent {
   usuario?: Usuario | null;
   listadoGruposUsuario: listadoGrupos[] = [];
+  comentarioPerfil?: comentariosPerfilDto;
   hayMensaje = false;
+  hayMensajeComentario = false;
 
   constructor(
     private servicioUsuario: ServicioUsuariosService,
@@ -34,6 +37,7 @@ export class PerfilPaginaComponent {
       this.usuario = usuarioParseado;
       // Con el usuario disponible, obtenemos sus grupos
       this.obtenerGrupos(usuarioParseado);
+      this.obtenerComentarios(usuarioParseado);
     } else {
       // Si no hay usuario en localStorage, nos suscribimos al observable
       this.servicioUsuario.usuarioPerfil$.subscribe((user: Usuario | null) => {
@@ -55,15 +59,14 @@ export class PerfilPaginaComponent {
 
     if (gruposGuardados) {
       const parsed = JSON.parse(gruposGuardados);
-      // Si no es un array, conviértelo en uno
-      console.log(JSON.parse(gruposGuardados).mensaje);
       if (JSON.parse(gruposGuardados).mensaje) {
         this.hayMensaje = true;
         console.log(this.hayMensaje);
       }
-
-      this.listadoGruposUsuario = Array.isArray(parsed)
-        ? parsed
+      console.log(parsed);
+      
+      this.listadoGruposUsuario = Array.isArray(parsed.gruposPerfil)
+        ? parsed.gruposPerfil
         : Object.values(parsed);
       console.log(this.listadoGruposUsuario);
     } else {
@@ -76,24 +79,36 @@ export class PerfilPaginaComponent {
           //localStorage.setItem('gruposUsuario', JSON.stringify(grupos));
         });
     }
-
+  }
+  private obtenerComentarios(usuario: Usuario): void {
     // // Recuperar comentario si existe en localStorage
-    // const comentarioGuardado = localStorage.getItem('comentarioUsuario');
-    // if (comentarioGuardado) {
-    //   this.comentario = JSON.parse(comentarioGuardado);
-    // } else {
-    //   this.servicioUsuario
-    //     .obtenerComentarioUsuario()
-    //     .subscribe((comentario) => {
-    //       this.comentario = comentario;
-    //       if (comentario) {
-    //         localStorage.setItem(
-    //           'comentarioUsuario',
-    //           JSON.stringify(comentario)
-    //         ); // Guardar comentario en localStorage
-    //       }
-    //     });
-    // }
+    const comentarioGuardado = localStorage.getItem('comentarioUsuario');
+
+    if (comentarioGuardado) {
+      const parsed = JSON.parse(comentarioGuardado);
+      // Si el comentario contiene una propiedad "mensaje", activamos una bandera
+      if (parsed.mensaje) {
+        this.hayMensajeComentario = true;
+        console.log(this.hayMensajeComentario);
+      }
+
+      this.comentarioPerfil = parsed.comentarios;
+      console.log(this.comentarioPerfil);
+    } else {
+      // Si no existe en localStorage, llamamos al servicio para obtenerlo
+      this.servicioPerfil
+        .obtenerComentario(usuario)
+        .subscribe((comentario: comentariosPerfilDto) => {
+          this.comentarioPerfil = comentario;
+          // Guardar comentario en localStorage si se obtiene
+          if (comentario) {
+            localStorage.setItem(
+              'comentarioUsuario',
+              JSON.stringify(comentario)
+            );
+          }
+        });
+    }
   }
 
   cerrarSesion() {

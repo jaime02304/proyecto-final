@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LoginUsuario, RegistroUsuario, Usuario } from '../modelos/usuario';
+import { PerfilServiciosService } from './perfil-servicios.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class ServicioUsuariosService {
   usuarioPerfil$ = this.userSubject.asObservable();
 
   private http = inject(HttpClient);
+  private servicioPerfil = inject(PerfilServiciosService);
 
   constructor() {}
 
@@ -24,6 +26,14 @@ export class ServicioUsuariosService {
       .pipe(
         tap((usuario) => {
           this.setUser(usuario);
+          this.servicioPerfil.obtenerGrupo(usuario).subscribe((response) => {
+            console.log(response);
+            this.servicioPerfil
+              .obtenerComentario(usuario)
+              .subscribe((response2) => {
+                console.log(response2);
+              });
+          });
         })
       );
   }

@@ -1,63 +1,58 @@
 <main class="contenedorMain">
-    <!-- Parte PC -->
-    <div class="container d-none d-xl-block">
-      <div class="row">
-        <div class="col">
-          <div class="contenedor-carrusel">
-            <div class="botones">
-              <button onclick="usuarioAnterior()" class="boton1">
-                <i class="fas fa-arrow-left"></i>
-              </button>
-              <button onclick="usuarioSiguiente()" class="boton2">
-                <i class="fas fa-arrow-right"></i>
-              </button>
+  <!-- Parte PC -->
+  <div class="container d-none d-xl-block">
+    <div class="row">
+      <div class="col">
+        <div class="contenedor-carrusel">
+          <div class="botones">
+            <button onclick="usuarioAnterior()" class="boton1">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <button onclick="usuarioSiguiente()" class="boton2">
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+          <div id="contenido-carrusel">
+            <div class="titulo-usuario" id="titulo-usuario">
+              Nombre del Usuario
             </div>
-            <div id="contenido-carrusel">
-              <div class="titulo-usuario" id="titulo-usuario">
-                Nombre del Usuario
+            <div class="contenedorTextoEImagen">
+              <img alt="Imagen del Usuario" class="imagen-usuario" id="imagen-usuario" />
+              <div class="texto-usuario" id="texto-usuario">
+                Texto del usuario
               </div>
-              <div class="contenedorTextoEImagen">
-                <img
-                  alt="Imagen del Usuario"
-                  class="imagen-usuario"
-                  id="imagen-usuario"
-                />
-                <div class="texto-usuario" id="texto-usuario">
-                  Texto del usuario
-                </div>
-                <div class="contenedorBoton">
-                  <button class="corazonBoton" type="button">
-                    <i class="fas fa-heart"></i>
-                  </button>
-                </div>
+              <div class="contenedorBoton">
+                <button class="corazonBoton" type="button">
+                  <i class="fas fa-heart"></i>
+                </button>
               </div>
             </div>
           </div>
         </div>
-        <div class="col parteDerechaMain">
-          <div class="row">
-            <div class="col-12">
-              <div class="zonaBienvenida">
-                <div class="tituloBienvenida">Bienvenido</div>
-                <div class="contenedorTextoBienvenida">
-                  ¡Bienvenido/a a AnimeXP! 🌟 El espacio donde el anime, los
-                  videojuegos y la pasión de los fans se encuentran. 🎮✨
-                  Descubre contenidos épicos, conecta con una comunidad
-                  increíble y vive tu afición como nunca antes. 🧡 ¡Explora,
-                  juega y siéntete como en casa! 🚀
-                </div>
+      </div>
+      <div class="col parteDerechaMain">
+        <div class="row">
+          <div class="col-12">
+            <div class="zonaBienvenida">
+              <div class="tituloBienvenida">Bienvenido</div>
+              <div class="contenedorTextoBienvenida">
+                ¡Bienvenido/a a AnimeXP! 🌟 El espacio donde el anime, los
+                videojuegos y la pasión de los fans se encuentran. 🎮✨
+                Descubre contenidos épicos, conecta con una comunidad
+                increíble y vive tu afición como nunca antes. 🧡 ¡Explora,
+                juega y siéntete como en casa! 🚀
               </div>
             </div>
-            <div class="col-12">
-              <div class="zonaGruposMain">
-                <div class="tituloBienvenida">GRUPOS</div>
-                <div class="contenedorGrupos">
-                  <div class="trozoGrupo">
-                    <div class="NombreGrupo">Nombre</div>
-                    <div class="categoriaGrupo">Categoria</div>
-                    <div class="tematicaGrupo">Tematica</div>
-                    <div><a href="#" class="verGrupo">Ver</a></div>
-                  </div>
+          </div>
+          <div class="col-12">
+            <div class="zonaGruposMain">
+              <div class="tituloBienvenida">GRUPOS</div>
+              <div class="contenedorGrupos">
+                <div class="trozoGrupo">
+                  <div class="NombreGrupo">Nombre</div>
+                  <div class="categoriaGrupo">Categoria</div>
+                  <div class="tematicaGrupo">Tematica</div>
+                  <div><a href="#" class="verGrupo">Ver</a></div>
                 </div>
               </div>
             </div>
@@ -65,71 +60,68 @@
         </div>
       </div>
     </div>
-    <!-- Parte tablet y portatiles -->
-    <div class="container d-none d-md-block d-xl-none">
-      <div class="row rowTablet">
-        <div class="col-12">
-          <div class="zonaBienvenida">
-            <div class="tituloBienvenida">Bienvenido</div>
-            <div class="contenedorTextoBienvenida">
-              ¡Bienvenido/a a AnimeXP! 🌟 El espacio donde el anime, los
-              videojuegos y la pasión de los fans se encuentran. 🎮✨ Descubre
-              contenidos épicos, conecta con una comunidad increíble y vive tu
-              afición como nunca antes. 🧡 ¡Explora, juega y siéntete como en
-              casa! 🚀
-            </div>
+  </div>
+  <!-- Parte tablet y portatiles -->
+  <div class="container d-none d-md-block d-xl-none">
+    <div class="row rowTablet">
+      <div class="col-12">
+        <div class="zonaBienvenida">
+          <div class="tituloBienvenida">Bienvenido</div>
+          <div class="contenedorTextoBienvenida">
+            ¡Bienvenido/a a AnimeXP! 🌟 El espacio donde el anime, los
+            videojuegos y la pasión de los fans se encuentran. 🎮✨ Descubre
+            contenidos épicos, conecta con una comunidad increíble y vive tu
+            afición como nunca antes. 🧡 ¡Explora, juega y siéntete como en
+            casa! 🚀
           </div>
         </div>
-        <div class="col-12">
-          <div class="row">
-            <div class="col">
-              <div class="contenedor-carrusel2">
-                <div class="botones">
-                  <button onclick="usuarioAnterior2()" class="boton1">
-                    <i class="fas fa-arrow-left"></i>
-                  </button>
-                  <button onclick="usuarioSiguiente2()" class="boton2">
-                    <i class="fas fa-arrow-right"></i>
-                  </button>
-                </div>
-                <div class="contenido-carrusel2">
-                  <div class="titulo-usuario2">Nombre del Usuario</div>
-                  <div class="contenedorTextoEImagen2">
-                    <img
-                      alt="Imagen del Usuario"
-                      class="imagen-usuario2"
-                    />
-                    <div class="texto-usuario2">Texto del usuario</div>
-                    <div class="contenedorBoton">
-                      <button class="corazonBoton2" type="button">
-                        <i class="fas fa-heart"></i>
-                      </button>
-                    </div>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col">
+            <div class="contenedor-carrusel2">
+              <div class="botones">
+                <button onclick="usuarioAnterior2()" class="boton1">
+                  <i class="fas fa-arrow-left"></i>
+                </button>
+                <button onclick="usuarioSiguiente2()" class="boton2">
+                  <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <div class="contenido-carrusel2">
+                <div class="titulo-usuario2">Nombre del Usuario</div>
+                <div class="contenedorTextoEImagen2">
+                  <img alt="Imagen del Usuario" class="imagen-usuario2" />
+                  <div class="texto-usuario2">Texto del usuario</div>
+                  <div class="contenedorBoton">
+                    <button class="corazonBoton2" type="button">
+                      <i class="fas fa-heart"></i>
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="col">
-              <div class="zonaGruposMain2 d-md-none d-lg-block">
-                <div class="tituloBienvenida">GRUPOS</div>
-                <div class="contenedorGrupos">
-                  <div class="trozoGrupo">
-                    <div class="NombreGrupo">Nombre</div>
-                    <div class="categoriaGrupo">Categoría</div>
-                    <div class="tematicaGrupo">Temática</div>
-                    <div><a href="#" class="verGrupo">Ver</a></div>
-                  </div>
+          <div class="col">
+            <div class="zonaGruposMain2 d-md-none d-lg-block">
+              <div class="tituloBienvenida">GRUPOS</div>
+              <div class="contenedorGrupos">
+                <div class="trozoGrupo">
+                  <div class="NombreGrupo">Nombre</div>
+                  <div class="categoriaGrupo">Categoría</div>
+                  <div class="tematicaGrupo">Temática</div>
+                  <div><a href="#" class="verGrupo">Ver</a></div>
                 </div>
               </div>
-              <div class="zonaGruposMain2 d-lg-none">
-                <div class="tituloBienvenida">GRUPOS</div>
-                <div class="contenedorGrupos">
-                  <div class="trozoGrupo">
-                    <div class="NombreGrupo">Nombre</div>
-                    <div class="tematicaGrupo">Temática</div>
-                    <div><a href="#" class="verGrupo">Ver</a></div>
-                  </div>
+            </div>
+            <div class="zonaGruposMain2 d-lg-none">
+              <div class="tituloBienvenida">GRUPOS</div>
+              <div class="contenedorGrupos">
+                <div class="trozoGrupo">
+                  <div class="NombreGrupo">Nombre</div>
+                  <div class="tematicaGrupo">Temática</div>
+                  <div><a href="#" class="verGrupo">Ver</a></div>
                 </div>
               </div>
             </div>
@@ -137,60 +129,58 @@
         </div>
       </div>
     </div>
-    <!-- Parte Movil -->
-    <div class="container d-block d-md-none">
-      <div class="row rowMovil">
-        <div class="col-12">
-          <div class="zonaBienvenida">
-            <div class="tituloBienvenida">Bienvenido</div>
-            <div class="contenedorTextoBienvenida">
-              ¡Bienvenido/a a AnimeXP! 🌟 El espacio donde el anime, los
-              videojuegos y la pasión de los fans se encuentran. 🎮✨ Descubre
-              contenidos épicos, conecta con una comunidad increíble y vive tu
-              afición como nunca antes. 🧡 ¡Explora, juega y siéntete como en
-              casa! 🚀
-            </div>
+  </div>
+  <!-- Parte Movil -->
+  <div class="container d-block d-md-none">
+    <div class="row rowMovil">
+      <div class="col-12">
+        <div class="zonaBienvenida">
+          <div class="tituloBienvenida">Bienvenido</div>
+          <div class="contenedorTextoBienvenida">
+            ¡Bienvenido/a a AnimeXP! 🌟 El espacio donde el anime, los
+            videojuegos y la pasión de los fans se encuentran. 🎮✨ Descubre
+            contenidos épicos, conecta con una comunidad increíble y vive tu
+            afición como nunca antes. 🧡 ¡Explora, juega y siéntete como en
+            casa! 🚀
           </div>
         </div>
-        <div class="col-12">
-          <div class="contenedor-carrusel3">
-            <div class="botones">
-              <button onclick="usuarioAnterior3()" class="boton1">
-                <i class="fas fa-arrow-left"></i>
-              </button>
-              <button onclick="usuarioSiguiente3()" class="boton2">
-                <i class="fas fa-arrow-right"></i>
-              </button>
-            </div>
-            <div class="contenido-carrusel3">
-              <div class="titulo-usuario3">Nombre del Usuario</div>
-              <div class="contenedorTextoEImagen3">
-                <img
-                  alt="Imagen del Usuario"
-                  class="imagen-usuario3"
-                />
-                <div class="texto-usuario3">Texto del usuario</div>
-                <div class="contenedorBoton">
-                  <button class="corazonBoton3" type="button">
-                    <i class="fas fa-heart"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
+      </div>
+      <div class="col-12">
+        <div class="contenedor-carrusel3">
+          <div class="botones">
+            <button onclick="usuarioAnterior3()" class="boton1">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <button onclick="usuarioSiguiente3()" class="boton2">
+              <i class="fas fa-arrow-right"></i>
+            </button>
           </div>
-        </div>
-        <div class="col-12">
-          <div class="zonaGruposMain2">
-            <div class="tituloBienvenida">GRUPOS</div>
-            <div class="contenedorGrupos">
-              <div class="trozoGrupo">
-                <div class="NombreGrupo">Nombre</div>
-                <div class="tematicaGrupo">Temática</div>
-                <div><a href="#" class="verGrupo">Ver</a></div>
+          <div class="contenido-carrusel3">
+            <div class="titulo-usuario3">Nombre del Usuario</div>
+            <div class="contenedorTextoEImagen3">
+              <img alt="Imagen del Usuario" class="imagen-usuario3" />
+              <div class="texto-usuario3">Texto del usuario</div>
+              <div class="contenedorBoton">
+                <button class="corazonBoton3" type="button">
+                  <i class="fas fa-heart"></i>
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="col-12">
+        <div class="zonaGruposMain2">
+          <div class="tituloBienvenida">GRUPOS</div>
+          <div class="contenedorGrupos">
+            <div class="trozoGrupo">
+              <div class="NombreGrupo">Nombre</div>
+              <div class="tematicaGrupo">Temática</div>
+              <div><a href="#" class="verGrupo">Ver</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </main>
+  </div>
+</main>
