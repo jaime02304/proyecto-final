@@ -42,7 +42,12 @@ export class InicioSesionComponent {
   inicioSesion2() {
     this.usuarioServicio.obtenerUsuario(this.usuarioLogin).subscribe(
       (usuario) => {
-        this.router.navigate(['/']);
+        if (typeof usuario === 'string') {
+          alert(usuario);
+        } else {
+          console.log(usuario);
+          this.router.navigate(['/']);
+        }
       },
       (error) => {
         alert('Error en el inicio de sesión');
@@ -84,7 +89,4 @@ export class InicioSesionComponent {
       }
     );
   }
-
-  
-
 }

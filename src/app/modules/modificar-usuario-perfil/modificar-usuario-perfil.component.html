@@ -1,0 +1,28 @@
+<div id="formularioModal" class="modal">
+    <div class="contenidoModal">
+      <span class="close" (click)="closeFormularioModal()">&times;</span>
+      <h2>Modificar Usuario</h2>
+      <form >
+        <!-- Campos visibles -->
+        <div>
+          <label for="aliasInput">Alias:</label>
+          <input type="text" id="aliasInput" formControlName="aliasInput" required />
+        </div>
+        <div>
+          <label for="nombreCompletoInput">Nombre Completo:</label>
+          <input type="text" id="nombreCompletoInput" formControlName="nombreCompletoInput" required />
+        </div>
+        <div>
+          <label for="movilInput">Teléfono Móvil:</label>
+          <input type="tel" id="movilInput" formControlName="movilInput" required />
+        </div>
+        <div>
+          <label for="fotoInput">Fotografía:</label>
+          <input type="file" id="fotoInput"  />
+        </div>
+        <button type="submit" class="manga-button">Guardar</button>
+      </form>
+    </div>
+  </div>
+  <!-- [formGroup]="formulario" (ngSubmit)="enviarFormulario()" -->
+  <!-- (change)="onFileChange($event)" -->

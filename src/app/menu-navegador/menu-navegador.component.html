@@ -24,33 +24,32 @@
             CATEGORÍA
           </button></a>
         <!-- Aqui deberia de poner una condicion que si es admin coja una cosa y si no que haga la otra -->
-        <ng-container *ngIf="usuarioPerfil; else sinUsuario">
-          <ng-container *ngIf="usuarioPerfil.rolUsu === 'user'; else checkAdmin">
-            <button [routerLink]="['/pagina-perfil']" routerLinkActive="router-link-active" class="botonNavegador">
-              PERFIL
+        <ng-container *ngIf="usuarioPerfil; else sinUsu1">
+          <ng-container *ngIf="usuarioPerfil.rolUsu === 'admin'; else superAdmin">
+            <button [routerLink]="['/admin']" routerLinkActive="router-link-active" class="botonNavegador">
+              ADMIN
             </button>
           </ng-container>
-
-          <ng-template #checkAdmin>
-            <ng-container *ngIf="usuarioPerfil.rolUsu === 'admin'; else sAdmin">
-              <button [routerLink]="['/admin']" routerLinkActive="router-link-active" class="botonNavegador">
-                ADMIN
+          <ng-template #superAdmin>
+            <ng-container *ngIf="usuarioPerfil.rolUsu === 'sadmin'; else checkUser">
+              <button [routerLink]="['/sadmin']" routerLinkActive="router-link-active" class="botonNavegador">
+                SUPER ADMIN
               </button>
             </ng-container>
           </ng-template>
-
-          <ng-template #sAdmin>
-            <button [routerLink]="['/sadmin']" routerLinkActive="router-link-active" class="botonNavegador">
-              SUPER ADMIN
+          <ng-template #checkUser>
+            <button [routerLink]="['/pagina-perfil']" routerLinkActive="router-link-active" class="botonNavegador">
+              PERFIL
             </button>
           </ng-template>
         </ng-container>
 
-        <ng-template #sinUsuario>
+        <ng-template #sinUsu1>
           <button class="botonIconoIS" [routerLink]="['/inicio-sesion']" routerLinkActive="router-link-active">
             <i class="fas fa-user icono"></i>
           </button>
         </ng-template>
+
       </div>
     </div>
   </nav>
@@ -78,23 +77,21 @@
           <a [routerLink]="['']" routerLinkActive="router-link-active">CATEGORÍA</a>
           <!-- Condición para mostrar Perfil de Usuario o Admin -->
           <ng-container *ngIf="usuarioPerfil; else sinUsu">
-            <ng-container *ngIf="usuarioPerfil.rolUsu === 'user'; else checkAdmin">
-              <a [routerLink]="['/pagina-perfil']" routerLinkActive="router-link-active">
-                PERFIL
+            <ng-container *ngIf="usuarioPerfil.rolUsu === 'admin'; else superAdmin">
+              <a [routerLink]="['/admin']" routerLinkActive="router-link-active">
+                ADMIN
               </a>
             </ng-container>
-
-            <ng-template #checkAdmin>
-              <ng-container *ngIf="usuarioPerfil.rolUsu === 'admin'; else superAdmin">
-                <a [routerLink]="['/admin']" routerLinkActive="router-link-active">
+            <ng-template #superAdmin>
+              <ng-container *ngIf="usuarioPerfil.rolUsu === 'sadmin'; else checkUser">
+                <a [routerLink]="['/sadmin']" routerLinkActive="router-link-active">
                   ADMIN
                 </a>
               </ng-container>
             </ng-template>
-
-            <ng-template #superAdmin>
-              <a [routerLink]="['/sadmin']" routerLinkActive="router-link-active">
-                ADMIN
+            <ng-template #checkUser>
+              <a [routerLink]="['/pagina-perfil']" routerLinkActive="router-link-active">
+                PERFIL
               </a>
             </ng-template>
           </ng-container>

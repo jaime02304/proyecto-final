@@ -25,15 +25,17 @@ export class ServicioUsuariosService {
       .post<Usuario>(`${this.apiUrl}/usuario/inicioSesion`, datos)
       .pipe(
         tap((usuario) => {
-          this.setUser(usuario);
-          this.servicioPerfil.obtenerGrupo(usuario).subscribe((response) => {
-            console.log(response);
-            this.servicioPerfil
-              .obtenerComentario(usuario)
-              .subscribe((response2) => {
-                console.log(response2);
+          if (usuario && usuario.idUsu) { // Asegúrate de que `id` o la propiedad que identifique a un usuario esté presente
+            this.setUser(usuario);
+            this.servicioPerfil.obtenerGrupo(usuario).subscribe((grupoResponse) => {
+              console.log(grupoResponse);
+              this.servicioPerfil.obtenerComentario(usuario).subscribe((comentarioResponse) => {
+                console.log(comentarioResponse);
               });
-          });
+            });
+          } else {
+            throw new Error('Mensaje de error'); // Lanzar un error si no es un usuario válido
+          }
         })
       );
   }
