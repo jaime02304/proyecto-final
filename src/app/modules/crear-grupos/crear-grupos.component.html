@@ -1,0 +1,36 @@
+<div *ngIf="mostrarModal" class="modal">
+    <div class="contenidoModal2">
+      <span class="close" (click)="closeCreacionGrupoModal()">&times;</span>
+      <h2 id="modalTituloGrupoNuevo">Crear Grupo</h2>
+      
+      <form [formGroup]="formularioCreacionGrupo" (ngSubmit)="enviarCreacionGrupo()">
+        <!-- Campo oculto para el creador -->
+        <input type="hidden" formControlName="aliasUsu">
+        
+        <div>
+          <label for="nombreGrupoNuevo">Nombre del Grupo</label>
+          <input type="text" id="nombreGrupoNuevo" formControlName="nombreGrupoNuevo" placeholder="Nombre del grupo" required>
+        </div>
+        
+        <div>
+          <label for="categoriaGrupoNuevo">Categoría</label>
+          <select id="categoriaGrupoNuevo" formControlName="categoriaGrupoNuevo" (change)="actualizarSubcategorias()">
+            <option value="anime">Anime</option>
+            <option value="videojuegos">Videojuegos</option>
+          </select>
+        </div>
+        
+        <div>
+          <label for="subCategoriaGrupoNuevo">Subcategoría</label>
+          <select id="subCategoriaGrupoNuevo" formControlName="subCategoriaGrupoNuevo">
+            <option *ngFor="let sub of subcategorias" [value]="sub.value">{{ sub.text }}</option>
+          </select>
+        </div>
+        
+        <div>
+          <button type="submit" [disabled]="formularioCreacionGrupo.invalid">Crear</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

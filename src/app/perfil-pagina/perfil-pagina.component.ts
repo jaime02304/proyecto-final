@@ -119,9 +119,6 @@ export class PerfilPaginaComponent {
     this.router.navigate(['/']); // Redirige al inicio de sesión
   }
 
-  openFormularioModal() {
-    console.log('Abrir modal para crear grupo');
-  }
 
   alertaDelPremium() {
     alert('Funcionalidad de premium aún no implementada');

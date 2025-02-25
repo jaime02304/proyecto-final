@@ -16,7 +16,8 @@
           <div class="divAliasPerfil">
             <h1 class="aliasPerfil">{{ usuario?.aliasUsu || "ALIAS" }}</h1>
           </div>
-          <button type="button" class="botonModificador" (click)="openFormularioModal()">
+          <button type="button" class="botonModificador" [routerLink]="['/modificar-perfil']"
+            routerLinkActive="router-link-active">
             <i class="fa-solid fa-pen"></i>
           </button>
         </div>
@@ -139,7 +140,8 @@
           <div class="divAliasPerfil">
             <h1 class="aliasPerfil">{{ usuario?.aliasUsu || "ALIAS" }}</h1>
           </div>
-          <button type="button" class="botonModificador" (click)="openFormularioModal()">
+          <button type="button" class="botonModificador" [routerLink]="['/modificar-perfil']"
+            routerLinkActive="router-link-active">
             <i class="fa-solid fa-pen"></i>
           </button>
         </div>

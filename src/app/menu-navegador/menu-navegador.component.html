@@ -26,13 +26,13 @@
         <!-- Aqui deberia de poner una condicion que si es admin coja una cosa y si no que haga la otra -->
         <ng-container *ngIf="usuarioPerfil; else sinUsu1">
           <ng-container *ngIf="usuarioPerfil.rolUsu === 'admin'; else superAdmin">
-            <button [routerLink]="['/admin']" routerLinkActive="router-link-active" class="botonNavegador">
+            <button [routerLink]="['/pagina-perfil']" routerLinkActive="router-link-active" class="botonNavegador">
               ADMIN
             </button>
           </ng-container>
           <ng-template #superAdmin>
             <ng-container *ngIf="usuarioPerfil.rolUsu === 'sadmin'; else checkUser">
-              <button [routerLink]="['/sadmin']" routerLinkActive="router-link-active" class="botonNavegador">
+              <button [routerLink]="['/pagina-perfil']" routerLinkActive="router-link-active" class="botonNavegador">
                 SUPER ADMIN
               </button>
             </ng-container>

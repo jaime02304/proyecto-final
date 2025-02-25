@@ -39,6 +39,39 @@ export class PerfilServiciosService {
       );
   }
 
+  modificarUsuario(datos: Usuario): Observable<Usuario> {
+    return this.http
+      .post<Usuario>(`${this.apiUrl}/ModificarUsuario`, datos)
+      .pipe(
+        tap((usuario: Usuario) => {
+          if (usuario && usuario.idUsu) {
+            this.setUser(usuario);
+            this.obtenerGrupo(usuario).subscribe((grupoResponse) => {
+              console.log(grupoResponse);
+              this.obtenerComentario(usuario).subscribe(
+                (comentarioResponse) => {
+                  console.log(comentarioResponse);
+                }
+              );
+            });
+          } else {
+            throw new Error('Mensaje de error'); // Lanzar un error si no es un usuario válido
+          }
+        })
+      );
+  }
+
+  // Guarda el usuario en BehaviorSubject y localStorage
+  private setUser(usuario: Usuario) {
+    localStorage.setItem('usuario', JSON.stringify(usuario)); // Guarda en localStorage
+  }
+
+  // Cargar usuario desde localStorage
+  private cargarUsuarioDesdeLocalStorage(): Usuario | null {
+    const usuarioGuardado = localStorage.getItem('usuario');
+    return usuarioGuardado ? JSON.parse(usuarioGuardado) : null;
+  }
+
   // Guarda el grupo en BehaviorSubject y localStorage
   private setComent(comentario: comentariosPerfilDto) {
     this.comentarioSubject.next(comentario);
