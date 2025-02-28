@@ -1,0 +1,135 @@
+/* ======== BOTÓN MANGA ========= */
+.manga-button {
+  background: white;
+  color: black;
+  font-family: "Bangers", sans-serif;
+  font-size: 26px;
+  font-weight: bold;
+  padding: 15px 30px;
+  border: 4px solid black;
+  border-radius: 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+  position: relative;
+  width: 150px;
+  margin: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.manga-button:hover {
+  background: black;
+  color: white;
+}
+
+/* ======== MODAL: Contenedor del modal de creación de grupo ========= */
+#formularioCreacionGrupoModal {
+  display: flex;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* ======== Contenido del modal ========= */
+.contenidoModal2 {
+  background-color: white;
+  border: 6px solid black;
+  padding: 30px;
+  width: 70%;
+  max-width: 600px;
+  text-align: center;
+  font-size: 20px;
+  box-shadow: 12px 12px 0px black;
+  position: relative;
+  transform: rotate(-2deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+  .contenidoModal2 {
+    width: 100%;
+    padding: 20px;
+    font-size: 18px;
+    transform: none;
+  }
+}
+
+/* ======== Botón de cerrar ========= */
+.close {
+  color: black;
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  background: white;
+  padding: 6px;
+  border: 4px solid black;
+  box-shadow: 4px 4px 0px black;
+  transform: rotate(5deg);
+  transition: all 0.3s;
+}
+
+.close:hover {
+  background: red;
+  color: white;
+}
+
+/* ======== Formulario del modal ========= */
+#formularioCreacionGrupo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  background: transparent;
+}
+
+/* Reducir el gap en el formulario si es necesario */
+@media (max-width: 600px) {
+  #formularioCreacionGrupo {
+    gap: 5px;
+  }
+}
+
+/* Etiquetas del formulario */
+#formularioCreacionGrupo label {
+  font-size: 22px;
+  text-align: center;
+}
+
+/* Inputs y selects del formulario */
+#formularioCreacionGrupo input,
+#formularioCreacionGrupo select {
+  padding: 10px;
+  border: 3px solid black;
+  font-size: 18px;
+  text-align: center;
+  width: 100%;
+  color: black;
+  max-width: 400px;
+}
+
+/* Ajuste responsivo en móviles para inputs y etiquetas */
+@media (max-width: 600px) {
+  #formularioCreacionGrupo label {
+    font-size: 18px;
+  }
+  #formularioCreacionGrupo input,
+  #formularioCreacionGrupo select {
+    font-size: 16px;
+    padding: 8px;
+  }
+}

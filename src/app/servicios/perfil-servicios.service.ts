@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { listadoGrupos } from '../modelos/grupos';
+import { Grupos, listadoGrupos } from '../modelos/grupos';
 import { Usuario } from '../modelos/usuario';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
@@ -17,6 +17,41 @@ export class PerfilServiciosService {
   private comentarioSubject = new BehaviorSubject<comentariosPerfilDto | null>(
     this.cargarComentarioDesdeLocalStorage()
   );
+
+  // Método para crear un grupo; se espera que la API retorne un objeto de tipo listadoGrupos
+  crearGrupo(datos: Grupos): Observable<Grupos> {
+    return this.http
+      .post<Grupos>(`${this.apiUrl}/CrearGrupoComoAdmin`, datos)
+      .pipe(
+        tap((nuevoGrupo: Grupos) => {
+          // Transformar `nuevoGrupo` a la estructura de `listadoGrupos`
+          const nuevoListadoGrupo: listadoGrupos = {
+            idGrupo: nuevoGrupo.idGrupo!, // ¡Asegúrate de que la API devuelve este valor!
+            nombreGrupo: nuevoGrupo.nombreGrupo,
+            categoriaNombre: nuevoGrupo.categoriaNombre,
+            subCategoriaNombre: nuevoGrupo.subCategoriaNombre,
+          };
+
+          // Obtener el listado actual, asegurando que sea un array
+          const gruposActuales = this.grupoSubject.value ?? [];
+
+          // Agregar el nuevo grupo transformado
+          const gruposActualizados: listadoGrupos[] = [
+            ...gruposActuales,
+            nuevoListadoGrupo,
+          ];
+
+          // Actualizar el BehaviorSubject con el nuevo listado
+          this.grupoSubject.next(gruposActualizados);
+
+          // Guardar en localStorage
+          localStorage.setItem(
+            'gruposUsuario',
+            JSON.stringify(gruposActualizados)
+          );
+        })
+      );
+  }
 
   obtenerGrupo(datos: Usuario): Observable<listadoGrupos[]> {
     return this.http

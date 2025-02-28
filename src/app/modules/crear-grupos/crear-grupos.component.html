@@ -1,36 +1,78 @@
-<div *ngIf="mostrarModal" class="modal">
-    <div class="contenidoModal2">
-      <span class="close" (click)="closeCreacionGrupoModal()">&times;</span>
-      <h2 id="modalTituloGrupoNuevo">Crear Grupo</h2>
-      
-      <form [formGroup]="formularioCreacionGrupo" (ngSubmit)="enviarCreacionGrupo()">
-        <!-- Campo oculto para el creador -->
-        <input type="hidden" formControlName="aliasUsu">
-        
-        <div>
-          <label for="nombreGrupoNuevo">Nombre del Grupo</label>
-          <input type="text" id="nombreGrupoNuevo" formControlName="nombreGrupoNuevo" placeholder="Nombre del grupo" required>
-        </div>
-        
-        <div>
-          <label for="categoriaGrupoNuevo">Categoría</label>
-          <select id="categoriaGrupoNuevo" formControlName="categoriaGrupoNuevo" (change)="actualizarSubcategorias()">
-            <option value="anime">Anime</option>
-            <option value="videojuegos">Videojuegos</option>
-          </select>
-        </div>
-        
-        <div>
-          <label for="subCategoriaGrupoNuevo">Subcategoría</label>
-          <select id="subCategoriaGrupoNuevo" formControlName="subCategoriaGrupoNuevo">
-            <option *ngFor="let sub of subcategorias" [value]="sub.value">{{ sub.text }}</option>
-          </select>
-        </div>
-        
-        <div>
-          <button type="submit" [disabled]="formularioCreacionGrupo.invalid">Crear</button>
-        </div>
-      </form>
-    </div>
+<div id="formularioCreacionGrupoModal" class="modal">
+  <div class="contenidoModal2">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h2 id="modalTituloGrupoNuevo" style="word-wrap: break-word; width: 90%">
+      Crear Grupo
+    </h2>
+    <form [formGroup]="grupoForm" (ngSubmit)="onSubmit()">
+      <input type="hidden" formControlName="aliasCreador" />
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+          padding: 5px;
+        "
+      >
+        <label for="nombreGrupoNuevo">Nombre del Grupo</label>
+        <input
+          style="
+            width: 70%;
+            border: 1px solid;
+            border-radius: 5px;
+            padding: 5px;
+          "
+          type="text"
+          id="nombreGrupoNuevo"
+          formControlName="nombreGrupoNuevo"
+          placeholder="Nombre del grupo"
+          required
+        />
+      </div>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+          padding: 5px;
+        "
+      >
+        <label for="categoriaGrupoNuevo">Categoría</label>
+        <select
+          style="border: 1px solid; border-radius: 5px; padding: 5px"
+          id="categoriaGrupoNuevo"
+          formControlName="categoriaGrupoNuevo"
+          (change)="updateSubcategorias()"
+        >
+          <option value="anime">Anime</option>
+          <option value="videojuegos">Videojuegos</option>
+        </select>
+      </div>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+          padding: 5px;
+        "
+      >
+        <label for="subCategoriaGrupoNuevo">Subcategoría</label>
+        <select
+          style="border: 1px solid; border-radius: 5px; padding: 5px"
+          id="subCategoriaGrupoNuevo"
+          formControlName="subCategoriaGrupoNuevo"
+        >
+          <option *ngFor="let sub of subcategorias" [value]="sub.value">
+            {{ sub.text }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <button type="submit" class="manga-button">Crear</button>
+      </div>
+    </form>
   </div>
-  
+</div>

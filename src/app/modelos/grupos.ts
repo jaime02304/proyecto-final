@@ -1,10 +1,10 @@
 export interface Grupos {
-  idGrupo: number;
+  idGrupo?: number;
   nombreGrupo: string;
-  creadorUsuId: number;
+  creadorUsuId?: number;
   aliasCreadorUString: string;
-  numeroUsuarios: number;
-  fechaGrupo: string;
+  numeroUsuarios?: number;
+  fechaGrupo?: Date;
   categoriaNombre: string;
   subCategoriaNombre: string;
 }

@@ -75,7 +75,7 @@
                 No se encontraron grupos disponibles.
               </div>
               <div class="tiposMensaje">
-                <button>Crear Grupo</button>
+                <button [routerLink]="['/crear-grupo']" routerLinkActive="router-link-active" >Crear Grupo</button>
               </div>
             </ng-container>
             <ng-template #gruposUsuario>
@@ -84,11 +84,11 @@
                 <div class="categoriaGrupo">{{ grupo.categoriaNombre }}</div>
                 <div class="tematicaGrupo">{{ grupo.subCategoriaNombre }}</div>
                 <div>
-                  <a href="#" class="verGrupo">Ver</a>
+                  <a href="#" class="verGrupo">Borrar</a>
                 </div>
               </div>
               <div class="tiposMensaje">
-                <button>Crear Grupo</button>
+                <button [routerLink]="['/crear-grupo']" routerLinkActive="router-link-active" >Crear Grupo</button>
               </div>
             </ng-template>
           </div>
@@ -215,11 +215,11 @@
               {{ grupo.subCategoriaNombre }}
             </div>
             <div>
-              <a href="#" class="verGrupo">Ver</a>
+              <a href="#" class="verGrupo">Borrar</a>
             </div>
           </div>
           <div class="tiposMensaje">
-            <button>
+            <button [routerLink]="['/crear-grupo']" routerLinkActive="router-link-active" >
               Crear Grupo
             </button>
           </div>
@@ -246,7 +246,7 @@
         </ng-container>
         <ng-template #crearComentarioMobile>
           <div class="tiposMensaje">
-            <button>Crear</button>
+            <button [routerLink]="['/crear-grupo']" routerLinkActive="router-link-active" >Crear</button>
           </div>
         </ng-template>
       </div>
