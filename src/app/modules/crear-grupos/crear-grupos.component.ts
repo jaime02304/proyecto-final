@@ -100,35 +100,46 @@ export class CrearGruposComponent {
 
   // Envío del formulario de creación de grupo
   onSubmit(): void {
-    if (this.grupoForm.invalid) {
-      return;
-    }
-
+    if (this.grupoForm.invalid) return;
     // Se crea un FormData con los datos del formulario
+    // Extraer y limpiar los valores del formulario
+    const {
+      nombreGrupoNuevo,
+      aliasCreador,
+      categoriaGrupoNuevo,
+      subCategoriaGrupoNuevo,
+    } = this.grupoForm.value;
+
     const grupo: Grupos = {
-      nombreGrupo: this.grupoForm.get('nombreGrupoNuevo')?.value,
-      aliasCreadorUString: this.grupoForm.get('aliasCreador')?.value,
-      categoriaNombre: this.grupoForm.get('categoriaGrupoNuevo')?.value,
-      subCategoriaNombre: this.grupoForm.get('subCategoriaGrupoNuevo')?.value,
+      nombreGrupo: nombreGrupoNuevo?.trim(),
+      aliasCreadorUString: aliasCreador?.trim(),
+      categoriaNombre: categoriaGrupoNuevo?.trim(),
+      subCategoriaNombre: subCategoriaGrupoNuevo?.trim(),
     };
 
+    // Deshabilitar temporalmente el botón para evitar múltiples envíos
+    this.grupoForm.disable();
     // Se invoca el servicio para crear el grupo
-    this.perfilServicio.crearGrupo(grupo).subscribe(
-      (response) => {
-        this.closeModal();
-        // Se muestra un mensaje de éxito
+    this.perfilServicio.crearGrupo(grupo).subscribe({
+      next: (response: any) => {
         alert(
           'Grupo creado correctamente. Dale a aceptar para observar los cambios.'
         );
-        // Opcional: redirigir o actualizar la vista de grupos
-      },
-      (error) => {
         this.closeModal();
-        console.error('Error al crear grupo', error);
+      },
+      error: (error) => {
+        console.error('Error al crear grupo:', error);
         alert(
           'El grupo ya existe o ocurrió un error. Inténtalo con otro nombre.'
         );
-      }
-    );
+
+        // Solo habilitamos el formulario si hay un error
+        this.grupoForm.enable();
+      },
+      complete: () => {
+        // Asegurar que el formulario se habilite tras la operación
+        this.grupoForm.enable();
+      },
+    });
   }
 }

@@ -7,7 +7,11 @@
         <div class="encabezado">
           <div class="divImagenPerfil">
             <ng-container *ngIf="usuario?.fotoUsu; else noAvatar">
-              <img [src]="usuario?.fotoUsu" alt="Foto Perfil del usuario" class="imagenUsuPerfil" />
+              <img
+                [src]="usuario?.fotoUsu"
+                alt="Foto Perfil del usuario"
+                class="imagenUsuPerfil"
+              />
             </ng-container>
             <ng-template #noAvatar>
               <div class="imagenUsuPerfil">No Avatar</div>
@@ -16,8 +20,12 @@
           <div class="divAliasPerfil">
             <h1 class="aliasPerfil">{{ usuario?.aliasUsu || "ALIAS" }}</h1>
           </div>
-          <button type="button" class="botonModificador" [routerLink]="['/modificar-perfil']"
-            routerLinkActive="router-link-active">
+          <button
+            type="button"
+            class="botonModificador"
+            [routerLink]="['/modificar-perfil']"
+            routerLinkActive="router-link-active"
+          >
             <i class="fa-solid fa-pen"></i>
           </button>
         </div>
@@ -50,14 +58,24 @@
             </h3>
           </div>
           <div class="ContenedorDatosPerfil">
-            <button [routerLink]="['']" routerLinkActive="router-link-active" class="hacersePremiumBoton botonNavegador"
-              (click)="cerrarSesion()">
+            <button
+              [routerLink]="['']"
+              routerLinkActive="router-link-active"
+              class="hacersePremiumBoton botonNavegador"
+              (click)="cerrarSesion()"
+            >
               Cerrar
             </button>
-            <button class="ValidarUsuario botonNavegador" *ngIf="usuario && !usuario.esVerificadoEntidad">
+            <button
+              class="ValidarUsuario botonNavegador"
+              *ngIf="usuario && !usuario.esVerificadoEntidad"
+            >
               Validar
             </button>
-            <button class="hacersePremiumBoton botonNavegador" (click)="alertaDelPremium()">
+            <button
+              class="hacersePremiumBoton botonNavegador"
+              (click)="alertaDelPremium()"
+            >
               Premium
             </button>
           </div>
@@ -65,7 +83,11 @@
       </div>
       <!-- Columna derecha: Vista exclusiva para rol "user" -->
       <!-- Columna derecha: Vista exclusiva para rol "user" -->
-      <div class="col-6" *ngIf="usuario?.rolUsu === 'user'">
+      <div
+        class="col-6"
+        *ngIf="usuario?.rolUsu === 'user'"
+        style="height: 100%"
+      >
         <div class="row contenedorDosPerfil">
           <!-- Sección de Grupos -->
           <div class="col contenedorInfoPerfilDerecho contenedorGruposB">
@@ -75,20 +97,41 @@
                 No se encontraron grupos disponibles.
               </div>
               <div class="tiposMensaje">
-                <button [routerLink]="['/crear-grupo']" routerLinkActive="router-link-active" >Crear Grupo</button>
+                <button
+                  [routerLink]="['/crear-grupo']"
+                  routerLinkActive="router-link-active"
+                >
+                  Crear Grupo
+                </button>
               </div>
             </ng-container>
             <ng-template #gruposUsuario>
-              <div *ngFor="let grupo of listadoGruposUsuario" class="trozoGrupo">
+              <div
+                *ngFor="let grupo of listadoGruposUsuario"
+                class="trozoGrupo"
+              >
                 <div class="NombreGrupo">{{ grupo.nombreGrupo }}</div>
                 <div class="categoriaGrupo">{{ grupo.categoriaNombre }}</div>
                 <div class="tematicaGrupo">{{ grupo.subCategoriaNombre }}</div>
                 <div>
-                  <a href="#" class="verGrupo">Borrar</a>
+                  <a
+                    [routerLink]="[
+                      '/eliminar-grupo',
+                      grupo.idGrupo,
+                      grupo.nombreGrupo
+                    ]"
+                    class="verGrupo"
+                    >Borrar</a
+                  >
                 </div>
               </div>
               <div class="tiposMensaje">
-                <button [routerLink]="['/crear-grupo']" routerLinkActive="router-link-active" >Crear Grupo</button>
+                <button
+                  [routerLink]="['/crear-grupo']"
+                  routerLinkActive="router-link-active"
+                >
+                  Crear Grupo
+                </button>
               </div>
             </ng-template>
           </div>
@@ -124,14 +167,21 @@
 
   <!-- Sección inferior: Grupos y Comentarios para el usuario -->
   <!-- Versión para móvil -->
-  <div class="container contenedorPrincipalPerfil d-block d-lg-none" *ngIf="usuario?.rolUsu === 'user'">
+  <div
+    class="container contenedorPrincipalPerfil d-block d-lg-none"
+    *ngIf="usuario?.rolUsu === 'user'"
+  >
     <div class="row columnaPrincipal">
       <!-- Información de perfil -->
       <div class="col-12 contenedorInfoPerfil">
         <div class="encabezado">
           <div class="divImagenPerfil">
             <ng-container *ngIf="usuario?.fotoUsu; else noAvatarMobile">
-              <img [src]="usuario?.fotoUsu" alt="Foto Perfil" class="imagenUsuPerfil" />
+              <img
+                [src]="usuario?.fotoUsu"
+                alt="Foto Perfil"
+                class="imagenUsuPerfil"
+              />
             </ng-container>
             <ng-template #noAvatarMobile>
               <div class="imagenUsuPerfil">No Avatar</div>
@@ -140,8 +190,12 @@
           <div class="divAliasPerfil">
             <h1 class="aliasPerfil">{{ usuario?.aliasUsu || "ALIAS" }}</h1>
           </div>
-          <button type="button" class="botonModificador" [routerLink]="['/modificar-perfil']"
-            routerLinkActive="router-link-active">
+          <button
+            type="button"
+            class="botonModificador"
+            [routerLink]="['/modificar-perfil']"
+            routerLinkActive="router-link-active"
+          >
             <i class="fa-solid fa-pen"></i>
           </button>
         </div>
@@ -174,20 +228,24 @@
           <div class="ContenedorDatosPerfil2">
             <div class="divBoton">
               <a [routerLink]="['/']">
-                <button class="hacersePremiumBoton2 botonNavegador" (click)="cerrarSesion()">
+                <button
+                  class="hacersePremiumBoton2 botonNavegador"
+                  (click)="cerrarSesion()"
+                >
                   Cerrar
                 </button>
               </a>
             </div>
             <div class="divBoton">
-              <button class="hacersePremiumBoton2 botonNavegador" (click)="alertaDelPremium()">
+              <button
+                class="hacersePremiumBoton2 botonNavegador"
+                (click)="alertaDelPremium()"
+              >
                 Premium
               </button>
             </div>
             <div class="divBoton" *ngIf="!usuario?.esVerificadoEntidad">
-              <button class="ValidarUsuario2 botonNavegador">
-                Validar
-              </button>
+              <button class="ValidarUsuario2 botonNavegador">Validar</button>
             </div>
           </div>
         </div>
@@ -198,13 +256,9 @@
       <div class="col-12 contenedorInfoPerfilDerecho contenedorGruposB">
         <h3>Grupos</h3>
         <ng-container *ngIf="hayMensaje; else gruposUsuarioMobile">
-          <div class="mensajeGrupo">
-            No se encontraron grupos disponibles.
-          </div>
+          <div class="mensajeGrupo">No se encontraron grupos disponibles.</div>
           <div class="tiposMensaje">
-            <button>
-              Crear Grupo
-            </button>
+            <button>Crear Grupo</button>
           </div>
         </ng-container>
         <ng-template #gruposUsuarioMobile>
@@ -215,11 +269,22 @@
               {{ grupo.subCategoriaNombre }}
             </div>
             <div>
-              <a href="#" class="verGrupo">Borrar</a>
+              <a
+                [routerLink]="[
+                  '/eliminar-grupo',
+                  grupo.idGrupo,
+                  grupo.nombreGrupo
+                ]"
+                class="verGrupo"
+                >Borrar</a
+              >
             </div>
           </div>
           <div class="tiposMensaje">
-            <button [routerLink]="['/crear-grupo']" routerLinkActive="router-link-active" >
+            <button
+              [routerLink]="['/crear-grupo']"
+              routerLinkActive="router-link-active"
+            >
               Crear Grupo
             </button>
           </div>
@@ -230,8 +295,10 @@
       <div class="col-12 contenedorInfoPerfilDerechoB">
         <div class="contenidoMensaje">
           <div class="contenidoMensaje2">
-            <ng-container *ngIf="!hayMensajeComentario; else noComentarioMobile">
-              {{ comentarioPerfil?.comentarioTexto}}
+            <ng-container
+              *ngIf="!hayMensajeComentario; else noComentarioMobile"
+            >
+              {{ comentarioPerfil?.comentarioTexto }}
             </ng-container>
             <ng-template #noComentarioMobile>
               No se encontraron comentarios para este usuario.
@@ -246,7 +313,12 @@
         </ng-container>
         <ng-template #crearComentarioMobile>
           <div class="tiposMensaje">
-            <button [routerLink]="['/crear-grupo']" routerLinkActive="router-link-active" >Crear</button>
+            <button
+              [routerLink]="['/crear-grupo']"
+              routerLinkActive="router-link-active"
+            >
+              Crear
+            </button>
           </div>
         </ng-template>
       </div>

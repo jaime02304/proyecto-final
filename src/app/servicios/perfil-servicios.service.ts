@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Grupos, listadoGrupos } from '../modelos/grupos';
+import { DeleteItem, Grupos, listadoGrupos } from '../modelos/grupos';
 import { Usuario } from '../modelos/usuario';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
@@ -18,37 +18,49 @@ export class PerfilServiciosService {
     this.cargarComentarioDesdeLocalStorage()
   );
 
+  eliminarElemento(datos: DeleteItem): Observable<DeleteItem> {
+    return this.http
+      .post<DeleteItem>(`${this.apiUrl}/EliminarElemento`, datos)
+      .pipe(
+        tap((nuevoGrupo: DeleteItem) => {
+          const usuario: Usuario = JSON.parse(localStorage.getItem('usuario')!);
+          if (usuario && usuario.idUsu) {
+            this.setUser(usuario);
+            this.obtenerGrupo(usuario).subscribe((grupoResponse) => {
+              console.log(grupoResponse);
+              this.obtenerComentario(usuario).subscribe(
+                (comentarioResponse) => {
+                  console.log(comentarioResponse);
+                }
+              );
+            });
+          } else {
+            throw new Error('Mensaje de error'); // Lanzar un error si no es un usuario válido
+          }
+        })
+      );
+  }
+
   // Método para crear un grupo; se espera que la API retorne un objeto de tipo listadoGrupos
   crearGrupo(datos: Grupos): Observable<Grupos> {
     return this.http
       .post<Grupos>(`${this.apiUrl}/CrearGrupoComoAdmin`, datos)
       .pipe(
         tap((nuevoGrupo: Grupos) => {
-          // Transformar `nuevoGrupo` a la estructura de `listadoGrupos`
-          const nuevoListadoGrupo: listadoGrupos = {
-            idGrupo: nuevoGrupo.idGrupo!, // ¡Asegúrate de que la API devuelve este valor!
-            nombreGrupo: nuevoGrupo.nombreGrupo,
-            categoriaNombre: nuevoGrupo.categoriaNombre,
-            subCategoriaNombre: nuevoGrupo.subCategoriaNombre,
-          };
-
-          // Obtener el listado actual, asegurando que sea un array
-          const gruposActuales = this.grupoSubject.value ?? [];
-
-          // Agregar el nuevo grupo transformado
-          const gruposActualizados: listadoGrupos[] = [
-            ...gruposActuales,
-            nuevoListadoGrupo,
-          ];
-
-          // Actualizar el BehaviorSubject con el nuevo listado
-          this.grupoSubject.next(gruposActualizados);
-
-          // Guardar en localStorage
-          localStorage.setItem(
-            'gruposUsuario',
-            JSON.stringify(gruposActualizados)
-          );
+          const usuario: Usuario = JSON.parse(localStorage.getItem('usuario')!);
+          if (usuario && usuario.idUsu) {
+            this.setUser(usuario);
+            this.obtenerGrupo(usuario).subscribe((grupoResponse) => {
+              console.log(grupoResponse);
+              this.obtenerComentario(usuario).subscribe(
+                (comentarioResponse) => {
+                  console.log(comentarioResponse);
+                }
+              );
+            });
+          } else {
+            throw new Error('Mensaje de error'); // Lanzar un error si no es un usuario válido
+          }
         })
       );
   }

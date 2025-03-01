@@ -15,3 +15,9 @@ export interface listadoGrupos {
   categoriaNombre: string;
   subCategoriaNombre: string;
 }
+
+export interface DeleteItem {
+  idElementoEliminar: number;
+  elementoEliminar: string;
+  esUsuarioEliminar: boolean; // siempre será false
+}
